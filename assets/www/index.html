@@ -1,48 +1,60 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
   <title>Frankie Convert2Euro</title> 
   
     <link rel="stylesheet" href="css/style.css">
 
   </head>
-  <body onload="onLoad();">
+  <body onLoad="onLoad();">
   <header>
-    <h1>Convert2Euro</h1>
+
 </header>
  
 <div id="wrapper">
     <div id="main-content">
-<div id="pages">
-    <div id="convert" class="current">
- Convert
-    </div>
-    <div id="camera">
- Camera
-    </div>
-    <div id="twitter">
- Twitter
-    </div>
-</div>
+		<div id="dollar">
+			<p>$ 999.99</p>
+	    </div>
+	    <div id="currency">
+	    	<div id="us"><p>US$</p></div>
+	    	<div id="can"><p>CAN$</p></div>
+	    </div>
+	    <div id="taxhead">
+	    	<p>tax</p>
+	    </div>
+	    <div id="ratehead">
+	    	<p>rate</p>
+	    </div>
+	    <div style="clear:both;"></div>
+   	    <div id="tax">
+	    	<p>12%</p>
+	    </div>
+	    <div id="rate">
+	    	<p>0.7</p>
+	    </div>
+  	    <div style="clear:both;"></div>
+	    <div class="line"></div>
+	    <div id="wothead">without tax</div>
+	    <div id="woteuro">
+	    	<p>999.99 €</p>
+	    </div>
+	    <div class="line"></div>
+	    <div id="wthead">with tax</div>
+	    <div id="wteuro">
+	    	<p>999.99 €</p>
+	    </div>
+
     </div>
 </div>
  
 <footer>
-<ul id="tab-bar">
-    <li>
-        <a href="#convert">convert</a>
-    </li>
- 
-    <li>
-        <a href="#camera">Camera</a>
-    </li>
- 
-    <li>
-        <a href="#twitter">Twitter</a>
-    </li>
-</ul>
+<div id="logo">
+   <img src="images/logo_frankie.png"/>
+</div>
 </footer>
 	<script src="js/phonegap-1.2.0.js"></script>
      <script src="js/jquery-1.7.1.min.js"></script>

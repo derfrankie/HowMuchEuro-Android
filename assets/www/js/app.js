@@ -20,6 +20,12 @@ $('#tab-bar a').on('click', function(e){
     nextPage.addClass("current");
 });
 
+function checkInput(textbox) {
+ var textInput = document.getElementById(textbox).value;
+
+ alert(textInput); 
+}
+
 
 function page(toPage) {
     var toPage = $(toPage),

@@ -1,3 +1,13 @@
+@font-face{
+ font-family: PlutoLight; 
+ src: url('../fonts/PlutoCondExtraLight-Italic.otf') format('opentype');
+ }
+
+@font-face{
+ font-family: PlutoBold; 
+ src: url('../fonts/PlutoCondBold-Italic.otf') format('opentype');
+ }
+
 html, body{
  margin: 0;
  padding: 0;
@@ -5,47 +15,45 @@ html, body{
 }
  
 body {
- font-family:Arial,  sans-serif;
+ font-family:PlutoLight ,Arial,  sans-serif;
  line-height:1.5;
- font-size:16px;
+ font-size:1em;
  background: #fff;
- padding:5px;
- color: #000;
+ padding:0px;
+ background: black;
+ color:rgba(0,165,255,1);
  word-wrap: break-word;
  -webkit-text-size-adjust: none;
 }
  
 h1, h2, h3, h4, h5, h6{ font-weight: normal; }
  
-p img { float: left; margin: 0 10px 5px 0; padding: 0; }
+img { float: left; margin: 0 10px 5px 0; padding: 0; }
  
 img { border: 0; max-width: 100%; }
 
+p { margin:0;}
+
 /*  Main Styles */
- 
-body{
-    background: #222;
-	color:#f3f3f3;
-}
  
 header{
     top:0; left:0;
-    height:45px;
+    height:5em;
+    background: rgba(0,165,255,1);
 }
- 
+
+
 footer {
     bottom:0; left:0;
-    height:48px;
-    background-color:#c27b00;
-    border-top:1px solid #eee;
+    height:5em;
+    background: rgba(0,165,255,1);
 }
  
 header, footer{
-    background-color:#deb500;
     padding:0;
     position:absolute;
     z-index:2;
-    font-size:20px;
+    font-size:1em;
     width:100%;
     text-align:center;
     color:#f3f3f3;
@@ -53,7 +61,14 @@ header, footer{
     text-shadow:0 -1px 0 rgba(0,0,0,0.5);
     line-height:45px;
 }
- 
+
+#logo {
+	margin-top: 5px;
+	display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
 h1{
     margin:0;
     text-transform: uppercase;
@@ -62,7 +77,7 @@ h1{
 #wrapper {
     position:absolute;
     z-index:1;
-    top:45px; bottom:48px; left:0;
+    top:5em; bottom:5em; left:0;
     width:100%;
     overflow:auto;
 }
@@ -72,7 +87,197 @@ h1{
     z-index:1;
     width:100%;
     padding:0;
+    display: block;
 }
+
+
+#dollar{
+    line-height:8.75em;
+    width:100%;
+    background: black;
+    color: rgba(0,165,255,1);;
+    margin;0 auto;
+}
+
+#dollar p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:5em;
+	text-align: center;
+
+}
+
+
+#dollar input {
+    background: none;
+	width: 80%;
+	border: none;
+	color:rgba(255,255,199,1);
+}
+
+#currency{
+    height:6.25em;
+    width:100%;
+    background: rgba(0,165,255,1);
+}
+
+#us{
+	margin-top: -2em;
+	margin-left: 1em;	
+    width: 10em;
+    float: left;
+    text-align: center;
+	line-height: 4em;
+	position: relative;
+	top: 50%;
+	background: rgba(0,243,255,1);
+	-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;
+	color: black;
+}
+
+#us p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:2.5em;
+	
+}
+#can{
+	margin-top: -2em;
+	margin-right:1em;	
+   	width: 10em;
+    text-align: center;
+	line-height: 4em;
+	position: relative;
+	top: 50%;
+	background: rgba(0,243,255,1);
+	-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;
+	color: black;
+	float:right;
+	background: rgba(255,255,255,.3);
+	
+}
+
+#can p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:2.5em;
+	
+}
+
+.btnOn {
+	background: rgba(255,255,255,.3);
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgba(255,255,255,1);
+	}
+
+#taxhead {
+	background: none;
+	margin-left:1em;	
+	position: relative;
+	float:left;
+}
+
+#taxhead p {
+	font-family: Plutolight ,Arial,  sans-serif;
+	font-size:3.5em;
+	margin: 0;
+	line-height:1em;
+}
+
+#ratehead {
+	background: none;
+	margin-right:1em;	
+	top:0%;
+	position: relative;
+	float:right;
+	
+}
+
+#ratehead p {
+	font-family: Plutolight ,Arial,  sans-serif;
+	font-size:3.5em;
+	margin: 0;
+	line-height:1em;
+}
+
+#tax {
+	background: none;
+	margin-left:1em;	
+	top:0%;
+	position: relative;
+	float:left;
+}
+
+#tax p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:5.5em;
+	line-height:1em;
+	margin: 0;
+}
+
+#rate {
+	background: none;
+	margin-right:1em;	
+	top:0%;
+	position: relative;
+	float:right;
+}
+
+#rate p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:5.5em;
+	line-height:1em;
+	margin: 0;
+}
+
+.line {
+	height: 0.625em;
+    background: rgba(0,165,255,1);
+}
+
+#wothead {
+	width: 100%;
+	font-family: Plutolight ,Arial,  sans-serif;
+	text-align: center;
+	font-size:1.8em;
+	line-height:2.5em;
+	margin: 0;
+}
+
+#woteuro {
+	width: 100%;
+	text-align: center;
+	line-height:8.75em;
+}
+
+#woteuro p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:5em;
+	line-height: 1em;
+	margin: 0;
+}
+
+#wthead {
+	width: 100%;
+	font-family: Plutolight ,Arial,  sans-serif;
+	text-align: center;
+	font-size:1.8em;
+	line-height:2.5em;
+	margin: 0;
+}
+
+#wteuro {
+	width: 100%;
+	text-align: center;
+	line-height:8.75em;
+}
+
+#wteuro p {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:5em;
+	line-height: 1em;
+	margin: 0;
+}
+
+/*  Pages we don't use */
 
 #tab-bar{
     margin:0;

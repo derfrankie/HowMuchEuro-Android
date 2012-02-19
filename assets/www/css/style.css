@@ -34,18 +34,23 @@ img { border: 0; max-width: 100%; }
 
 p { margin:0;}
 
+a { text-decoration: none;}
+
+a:link {
+  -webkit-tap-highlight-color: transparent; }
+
 /*  Main Styles */
  
 header{
     top:0; left:0;
-    height:5em;
+    height:3em;
     background: rgba(0,165,255,1);
 }
 
 
 footer {
     bottom:0; left:0;
-    height:5em;
+    height:3em;
     background: rgba(0,165,255,1);
 }
  
@@ -71,13 +76,15 @@ header, footer{
 
 h1{
     margin:0;
-    text-transform: uppercase;
+    font-size:2em;
+	font-family: PlutoBold ,Arial,  sans-serif;
+	color: #FFFFF;
 }
  
 #wrapper {
     position:absolute;
     z-index:1;
-    top:5em; bottom:5em; left:0;
+    top:3em; bottom:3em; left:0;
     width:100%;
     overflow:auto;
 }
@@ -91,20 +98,6 @@ h1{
 }
 
 
-#dollar{
-    line-height:8.75em;
-    width:100%;
-    background: black;
-    color: rgba(0,165,255,1);;
-    margin;0 auto;
-}
-
-#dollar p {
-	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:5em;
-	text-align: center;
-
-}
 
 
 #dollar input {
@@ -114,168 +107,100 @@ h1{
 	color:rgba(255,255,199,1);
 }
 
-#currency{
-    height:6.25em;
-    width:100%;
-    background: rgba(0,165,255,1);
-}
-
-#us{
-	margin-top: -2em;
-	margin-left: 1em;	
-    width: 10em;
-    float: left;
-    text-align: center;
-	line-height: 4em;
-	position: relative;
-	top: 50%;
-	background: rgba(0,243,255,1);
-	-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;
-	color: black;
-}
-
-#us p {
-	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:2.5em;
-	
-}
-#can{
-	margin-top: -2em;
-	margin-right:1em;	
-   	width: 10em;
-    text-align: center;
-	line-height: 4em;
-	position: relative;
-	top: 50%;
-	background: rgba(0,243,255,1);
-	-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;
-	color: black;
-	float:right;
-	background: rgba(255,255,255,.3);
-	
-}
-
-#can p {
-	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:2.5em;
-	
-}
-
 .btnOn {
 	background: rgba(255,255,255,.3);
 	border-width: 2px;
 	border-style: solid;
 	border-color: rgba(255,255,255,1);
 	}
-
-#taxhead {
-	background: none;
-	margin-left:1em;	
-	position: relative;
-	float:left;
-}
-
-#taxhead p {
-	font-family: Plutolight ,Arial,  sans-serif;
-	font-size:3.5em;
-	margin: 0;
-	line-height:1em;
-}
-
-#ratehead {
-	background: none;
-	margin-right:1em;	
-	top:0%;
-	position: relative;
-	float:right;
 	
+#buttonwrapper {
+	width:100%;
+	background: rgba(0,165,255,1);
+	height: 3.7em;
+	margin:0;
+	padding: 0;
+}
+#buttonwrapper:after {
+    clear: both; }
+
+#buttonwrapper li {
+    display: inline;
+    float: left;
+    width: 33.333%; }
+	
+.button {
+	width: 33.3%;
+	background: none;
+	display: inline;
+    float:left;
 }
 
-#ratehead p {
+#buttonwrapper a {
+    color: black;
+}
+	
+.backhome {
+	background: rgba(0,165,255,1);
+	color:black;
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:1.5em;
+	margin: 0;
+	border-width: 2px;
+	border-top-style: solid;
+	border-color:#black;
+}
+
+.backhome  a{
+	color:black;
+}
+.headsmall {
+	text-align: center;
 	font-family: Plutolight ,Arial,  sans-serif;
-	font-size:3.5em;
+	font-size:1em;
 	margin: 0;
-	line-height:1em;
+	line-height:1.5em;
+	color: black;
 }
 
-#tax {
-	background: none;
-	margin-left:1em;	
-	top:0%;
-	position: relative;
-	float:left;
-}
-
-#tax p {
+.boldsmall  {
+	text-align: center;
 	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:5.5em;
+	font-size:2em;
 	line-height:1em;
 	margin: 0;
+	color: black;
 }
 
-#rate {
-	background: none;
-	margin-right:1em;	
-	top:0%;
-	position: relative;
-	float:right;
+.largetext{
+    line-height:4em;
+    width:100%;
+    background: black;
+    color: #00F3FF;
+    margin:0 auto;
 }
 
-#rate p {
+.largetext p {
 	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:5.5em;
-	line-height:1em;
+	font-size:4em;
+	text-align: center;
+    margin:0;
+}
+
+.middletext {
+	width: 100%;
+	font-family: Plutolight ,Arial,  sans-serif;
+	text-align: center;
+	font-size:1.8em;
+	line-height:1.5em;
 	margin: 0;
 }
 
 .line {
-	height: 0.625em;
+	height: 0.3em;
     background: rgba(0,165,255,1);
 }
 
-#wothead {
-	width: 100%;
-	font-family: Plutolight ,Arial,  sans-serif;
-	text-align: center;
-	font-size:1.8em;
-	line-height:2.5em;
-	margin: 0;
-}
-
-#woteuro {
-	width: 100%;
-	text-align: center;
-	line-height:8.75em;
-}
-
-#woteuro p {
-	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:5em;
-	line-height: 1em;
-	margin: 0;
-}
-
-#wthead {
-	width: 100%;
-	font-family: Plutolight ,Arial,  sans-serif;
-	text-align: center;
-	font-size:1.8em;
-	line-height:2.5em;
-	margin: 0;
-}
-
-#wteuro {
-	width: 100%;
-	text-align: center;
-	line-height:8.75em;
-}
-
-#wteuro p {
-	font-family: PlutoBold ,Arial,  sans-serif;
-	font-size:5em;
-	line-height: 1em;
-	margin: 0;
-}
 
 /*  Pages we don't use */
 

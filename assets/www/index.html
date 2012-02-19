@@ -11,44 +11,78 @@
   </head>
   <body onLoad="onLoad();">
   <header>
-
+<h1>How much in Euro</h1>
 </header>
  
 <div id="wrapper">
     <div id="main-content">
-		<div id="dollar">
-			<p>$ 999.99</p>
-	    </div>
-	    <div id="currency">
-	    	<div id="us"><p>US$</p></div>
-	    	<div id="can"><p>CAN$</p></div>
-	    </div>
-	    <div id="taxhead">
-	    	<p>tax</p>
-	    </div>
-	    <div id="ratehead">
-	    	<p>rate</p>
-	    </div>
-	    <div style="clear:both;"></div>
-   	    <div id="tax">
-	    	<p>12%</p>
-	    </div>
-	    <div id="rate">
-	    	<p>0.7</p>
-	    </div>
-  	    <div style="clear:both;"></div>
-	    <div class="line"></div>
-	    <div id="wothead">without tax</div>
-	    <div id="woteuro">
-	    	<p>999.99 €</p>
-	    </div>
-	    <div class="line"></div>
-	    <div id="wthead">with tax</div>
-	    <div id="wteuro">
-	    	<p>999.99 €</p>
-	    </div>
+		<div id="pages">
+			<div id="home" class="current">
+				<div id="catchswipe">
+					<div id="swipehead" class="middletext">
+						< swipe to change >
+					</div>
+					<div id="dollar" class="largetext">
+						<p>$ 999.99</p>
+					</div>
+				</div>
+				<ul id="buttonwrapper">
+					<li id="taxbutton" class="button">
+						<div id="taxhead" class="headsmall">
+							<a href="#taxpage">tax</a>
+						</div>
+						<div id="tax" class="boldsmall" >
+							<a href="#taxpage">12%</a>
+						</div>
+					</li>
+					<li id="currbutton" class="button">
+						<div id="currhead" class="headsmall">
+							<a href="#currencypage">currency</a>
+						</div>
+						<div id="curr" class="boldsmall">
+							<a href="#currencypage">CAN$</a>
+						</div>
+					</li>
+					<li id="ratebutton" class="button">
+						<div id="ratehead" class="headsmall">
+							<a href="#ratepage">rate</a>
+						</div>
+						<div id="rate" class="boldsmall">
+							<a href="#ratepage">0.7</a>
+						</div>
+					</li>
+				</ul>
+				<div id="wothead" class="middletext">cost without tax</div>
+				<div id="woteuro"  class="largetext">
+					<p>999</p>
+				</div>
+				<div class="line"></div>
+				<div id="wthead" class="middletext">cost with tax</div>
+				<div id="wteuro"  class="largetext">
+					<p>999</p>
+				</div>
+			</div>
+			<div id="taxpage">
+				<div class="backhome">
+					<a href="#home">< back</a>
+					
+				</div>
+		</div>
+			<div id="currencypage">
+				<div class="backhome">
+					<a href="#home">< back</a>
+					
+				</div>
+		</div>
+			<div id="ratepage">
+				<div class="backhome">
+					<a href="#home">< back</a>
+					
+				</div>
+		</div>
+		</div>
 
-    </div>
+	</div>
 </div>
  
 <footer>
@@ -60,6 +94,11 @@
      <script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/iscroll-lite.js"></script>
 	<script src="js/app.js"></script>
+ 	<script src="js/jquery.numberformatter-1.2.3.min.js"></script>
+ 	<script src="js/jshashtable-2.1.js"></script>
+ 	<script src="js/jshashset.js"></script>
+
+
  
   </body>
 </html>

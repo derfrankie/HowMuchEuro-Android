@@ -175,7 +175,7 @@ h1{
 .largetext{
     line-height:4em;
     width:100%;
-    background: black;
+    background: none;
     color: #00F3FF;
     margin:0 auto;
 }
@@ -201,6 +201,11 @@ h1{
     background: rgba(0,165,255,1);
 }
 
+
+.swiping {
+	-webkit-animation-name: fade-in;
+	background: white;
+}
 
 /*  Pages we don't use */
 

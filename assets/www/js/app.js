@@ -6,43 +6,115 @@ function onDeviceReady(){
      }
 
 var theScroll;
-var valDollar = "10";
-var valRate="0.75";
-var valTax="12";
-var strCurrency="CAN$";
+var valDollar;
+var valTax;
+var strCurrency;
 var valEuro;
 var valEuroTax;
+var originalDollar;
+var currentDolllar;
+
+
+
+//storage
+
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+
+
+function saveState() {
+	if (!supports_html5_storage()) { return false; }
+    localStorage["convert2euro.base"] = fx.base;
+	localStorage.setItem('convert2euro.rates', JSON.stringify(fx.rates));
+    localStorage["convert2euro.lastDollar"] = window.valDollar;
+	localStorage["convert2euro.lastTax"] = window.valTax;
+	localStorage["convert2euro.lastCurrency"] = window.strCurrency;
+    return true;
+}
+
+function loadState() {
+	if (!supports_html5_storage()) { return false; }
+	nfirstime = (localStorage["convert2euro.base"] == "USD");
+    if (!nfirstime) { 
+	return false; }
+	fx.base = localStorage["convert2euro.base"];
+	tmprates = localStorage.getItem('convert2euro.rates');
+	console.log(tmprates);
+	fx.rates = JSON.parse(tmprates);
+    window.valDollar = localStorage["convert2euro.lastDollar"];
+	window.valTax = localStorage["convert2euro.lastTax"];
+	window.strCurrency = localStorage["convert2euro.lastCurrency"];
+    return true;
+}
+// Use jQuery.ajax to get the latest exchange rates, with JSONP:
+// Load exchange rates data via the cross-domain/AJAX proxy:
+    $.getJSON(
+        'http://openexchangerates.org/latest.json',
+        function(data) {
+            
+			// Check money.js has finished loading:
+            if ( typeof fx !== "undefined" && fx.rates ) {
+                fx.rates = data.rates;
+                fx.base = data.base;
+            } else {
+                // If not, apply to fxSetup global:
+                var fxSetup = {
+                    rates : data.rates,
+                    base : data.base
+                }
+            }
+        }
+    );
+
+if (!loadState()) { 
+	fx.base = "USD";
+	fx.rates = {
+		"EUR" : 0.74510096, // eg. 1 USD === 0.74510096 EUR
+		"GBP" : 0.64771034,
+		"CAD" : 1.00402,
+		"USD" : 1,          // always include the base rate (1:1)
+	}
+	valDollar = "12";
+	valTax="12";
+	strCurrency="CAD";	
+	}
+	// rates
+
+
+	
+console.log('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
 
 $('#dollar p').html('$ '+ valDollar );
 $('#tax').html(valTax + '%' );
-$('#rate').html(valRate + ' €' );
+$('#rate').html((fx(1).from(strCurrency).to('EUR').toFixed(2)) + ' €' );
 $('#curr').html(strCurrency);
 
 calculate();
 
 function scroll(){
-    //theScroll = new iScroll('wrapper');
+    theScroll = new iScroll('wrapper');
 }
 	
 function calculate() {
-	window.valEuro=parseFloat(window.valDollar) * parseFloat(window.valRate);
-	window.valEuroTax= parseFloat(window.valTax) / 100 * parseFloat(window.valDollar)+parseFloat(window.valDollar);
+	//window.valEuro=parseFloat(window.valDollar) * parseFloat(window.valRate);
+	//window.valEuroTax= parseFloat(window.valTax) / 100 * parseFloat(window.valDollar)+parseFloat(window.valDollar);
+	window.valEuro = fx(window.valDollar).from(window.strCurrency).to('EUR');
+	window.valEuroTax = fx(parseFloat(window.valTax) / 100 * parseFloat(window.valDollar)+parseFloat(window.valDollar)).from(window.strCurrency).to('EUR');
+		
 	window.valEuroTax=window.valEuroTax.toFixed(2)
 	window.valEuro=window.valEuro.toFixed(2)
 	$('#woteuro p').html(window.valEuro +" €");
 	$('#wteuro p').html(window.valEuroTax+" €");
-}
+	if (window.currentDolllar != window.originalDollar) { saveState(); }
 
-
-String.format = function() {
-  var s = arguments[0];
-  for (var i = 0; i < arguments.length - 1; i++) {       
-    var reg = new RegExp("\\{" + i + "\\}", "gm");             
-    s = s.replace(reg, arguments[i + 1]);
-  }
-
-  return s;
-}
+	}
+	
 document.addEventListener('DOMContentLoaded', scroll, false);
 
 $('#buttonwrapper a').on('click', function(e){
@@ -78,7 +150,7 @@ $.fn.swipe = function(options) {
     // Default thresholds & swipe functions
     var defaults = {
         threshold: {
-            x: 30,
+            x: 10,
             y: 10
         },
         swipeLeft: function() { alert('swiped left') },
@@ -87,6 +159,7 @@ $.fn.swipe = function(options) {
     };
 
     var options = $.extend(defaults, options);
+
 
     if (!this) return false;
 
@@ -103,6 +176,10 @@ $.fn.swipe = function(options) {
             console.log('Starting swipe gesture...')
             originalCoord.x = event.targetTouches[0].pageX
             originalCoord.y = event.targetTouches[0].pageY
+			$("#catchswipe").addClass("swiping");
+			window.originalDollar = window.valDollar;
+			window.currentDolllar = window.valDollar;
+
         }
 
         // Store coordinates as finger is swiping
@@ -111,6 +188,32 @@ $.fn.swipe = function(options) {
                 event.preventDefault();
             finalCoord.x = event.targetTouches[0].pageX // Updated X,Y coordinates
             finalCoord.y = event.targetTouches[0].pageY
+			
+			WchangeX = originalCoord.x - finalCoord.x
+			console.log(WchangeX);
+			
+			//swipe left
+			if(WchangeX > defaults.threshold.x) {
+			
+			
+				if (parseFloat(window.currentDolllar) - (0.1 * WchangeX) > 0) {
+                    
+						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * WchangeX)
+						window.currentDolllar = window.currentDolllar.toFixed(2)
+					} else {
+						window.currentDolllar = 0;
+					}
+					$('#dollar p').html('$ '+ window.currentDolllar );
+			
+			}
+				
+			//swipe right
+                if(WchangeX < (defaults.threshold.x*-1)) {
+					WchangeX = WchangeX * -1
+					window.currentDolllar = parseFloat(originalDollar) + 0.1 * WchangeX
+					window.currentDolllar = window.currentDolllar.toFixed(2)
+					$('#dollar p').html('$ '+ window.currentDolllar );
+                }
         }
 
         // Done Swiping
@@ -118,6 +221,11 @@ $.fn.swipe = function(options) {
         // Calculate if the swipe was left or right
         function touchEnd(event) {
             console.log('Ending swipe gesture...')
+			$("#catchswipe").removeClass("swiping");
+			window.valDollar = window.currentDolllar;
+			calculate();
+			
+
             var changeY = originalCoord.y - finalCoord.y
             if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
                 changeX = originalCoord.x - finalCoord.x
@@ -134,6 +242,7 @@ $.fn.swipe = function(options) {
         // Swipe was canceled
         function touchCancel(event) { 
             console.log('Canceling swipe gesture...')
+			$("#catchswipe").removeClass("swiping");
         }
 
         // Add gestures to all swipable areas
@@ -148,23 +257,11 @@ $.fn.swipe = function(options) {
 
 $('#catchswipe').swipe({
  swipeLeft: function(chx)  {
-// alert (chx);
- chx = chx * -1
-  if (parseFloat(window.valDollar) - (0.1 * chx) < 0) {
-	window.valDollar = parseFloat(window.valDollar) - (0.1 * chx)
-	window.valDollar=window.valDollar.toFixed(2)
- } else {
-    window.valDollar = 0;
- }
- $('#dollar p').html('$ '+ valDollar );
- calculate();
+ 
  },
  swipeRight: function(chx)  { 
-  //alert (chx);
- chx = chx * -1
- window.valDollar = parseFloat(window.valDollar) + 0.1 * chx
- window.valDollar=window.valDollar.toFixed(2)
- $('#dollar p').html('$ '+ valDollar );
- calculate();
+ 
  },
 })
+
+

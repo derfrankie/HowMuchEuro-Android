@@ -1,9 +1,9 @@
-*Convert2Euro aka How Much in Euro"
-===================================
+Convert2Euro aka How Much in Euro
+=================================
 Description
 
 
-*Changelog*
+Changelog
 -----------
 0.1 - First Design Study
 0.2 -	First workable Version

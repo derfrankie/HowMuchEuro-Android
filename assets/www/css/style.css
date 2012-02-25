@@ -16,14 +16,15 @@ html, body{
  
 body {
  font-family:PlutoLight ,Arial,  sans-serif;
- line-height:1.5;
+ line-height:2.5;
  font-size:1em;
  background: #fff;
  padding:0px;
  background: black;
- color:rgba(0,165,255,1);
+ color:#351330;
  word-wrap: break-word;
  -webkit-text-size-adjust: none;
+ text-align: center;
 }
  
 h1, h2, h3, h4, h5, h6{ font-weight: normal; }
@@ -44,14 +45,21 @@ a:link {
 header{
     top:0; left:0;
     height:3em;
-    background: rgba(0,165,255,1);
+background: #50726d; /* Old browsers */
+background: -webkit-gradient(linear, left top, right top, color-stop(1%,#50726d), color-stop(50%,#64908a), color-stop(100%,#50726d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* Chrome10+,Safari5.1+ */
+background: linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* W3C */
+
 }
 
 
 footer {
     bottom:0; left:0;
     height:3em;
-    background: rgba(0,165,255,1);
+background: #50726d; /* Old browsers */
+background: -webkit-gradient(linear, left top, right top, color-stop(1%,#50726d), color-stop(50%,#64908a), color-stop(100%,#50726d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* Chrome10+,Safari5.1+ */
+background: linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* W3C */
 }
  
 header, footer{
@@ -65,6 +73,8 @@ header, footer{
     font-weight:bold;
     text-shadow:0 -1px 0 rgba(0,0,0,0.5);
     line-height:45px;
+-webkit-box-shadow: 0 0 5px 1px #424254;
+box-shadow: 0 0 5px 1px #424254;
 }
 
 #logo {
@@ -80,14 +90,27 @@ h1{
 	font-family: PlutoBold ,Arial,  sans-serif;
 	color: #FFFFF;
 }
- 
+
+#home {
+	height:100%;
+	}
+
+#settingspage {
+	height:100%;
+	}
+	
 #wrapper {
     position:absolute;
     z-index:1;
     top:3em; bottom:3em; left:0;
     width:100%;
     overflow:auto;
+    background: #e8caa4; /* Old browsers */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#e8caa4), color-stop(50%,#ffe5c6), color-stop(100%,#e8caa4)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #e8caa4 0%,#ffe5c6 50%,#e8caa4 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(left,  #e8caa4 0%,#ffe5c6 50%,#e8caa4 100%); /* W3C */
 }
+ 
  
 #main-content {
     position:absolute;
@@ -96,7 +119,6 @@ h1{
     padding:0;
     display: block;
 }
-
 
 
 
@@ -113,22 +135,71 @@ h1{
 	border-style: solid;
 	border-color: rgba(255,255,255,1);
 	}
-	
+
 #buttonwrapper {
 	width:100%;
-	background: rgba(0,165,255,1);
-	height: 3.7em;
+	height: 4.5em;
 	margin:0;
 	padding: 0;
+	-webkit-box-shadow: 0 0 5px 1px #424254;
+	box-shadow: 0 0 5px 1px #424254;
+	background: #64908a; /* Old browsers */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#64908a), color-stop(50%,#50726d), color-stop(100%,#64908a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* W3C */
 }
-#buttonwrapper:after {
+
+
+
+.subheader:after {
     clear: both; }
 
 #buttonwrapper li {
     display: inline;
     float: left;
     width: 33.333%; }
-	
+
+.centerbuttons {
+	display: table;   /* Allow the centering to work */
+	margin: 0 auto;
+}
+
+.currencybar {
+	width:100%;
+	height: 3.5em;
+	margin:0 auto;
+	padding: 0;
+	text-align: center;
+}
+
+.currencybar li {
+    display: inline;
+    float: left;
+    width: 7em;
+	margin: 1em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 0 5px 1px #424254;
+	box-shadow: 0 0 5px 1px #424254;
+	background: #64908a; /* Old browsers */
+/*	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#64908a), color-stop(50%,#50726d), color-stop(100%,#64908a)); /* Chrome,Safari4+ */
+/*	background: -webkit-linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* Chrome10+,Safari5.1+ */
+/*	background: linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* W3C */
+	color: white;
+		-webkit-box-shadow: 0 0 5px 1px #424254;
+	box-shadow: 0 0 5px 1px #424254;
+}
+
+.buttondown  {
+	font-family: PlutoBold ,Arial,  sans-serif;
+	-webkit-box-shadow: inset 0 0 5px 1px #424254;
+	box-shadow: inset 0 0 5px 1px #424254;
+	background: #white; !important /* Old browsers */
+
+}
+
+
 .button {
 	width: 33.3%;
 	background: none;
@@ -136,10 +207,12 @@ h1{
     float:left;
 }
 
+
 #buttonwrapper a {
-    color: black;
+    color: #424254;
+
 }
-	
+
 .backhome {
 	background: rgba(0,165,255,1);
 	color:black;
@@ -159,8 +232,9 @@ h1{
 	font-family: Plutolight ,Arial,  sans-serif;
 	font-size:1em;
 	margin: 0;
-	line-height:1.5em;
-	color: black;
+	line-height:2em;
+	color: white;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
 }
 
 .boldsmall  {
@@ -169,44 +243,87 @@ h1{
 	font-size:2em;
 	line-height:1em;
 	margin: 0;
-	color: black;
+	color: white;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
 }
 
-.largetext{
-    line-height:4em;
-    width:100%;
-    background: none;
-    color: #00F3FF;
-    margin:0 auto;
+.boldtext {
+	font-family: PlutoBold ,Arial,  sans-serif;
 }
+.largetext{
+    line-height:3.5em;
+    width:100%;
+    background-color: none;
+    color: #50726d;
+    margin:1em 0 auto;
+	-webkit-background-clip: text;
+	-webkit-text-stroke: 0;
+	text-shadow: 1px 1px white, -1px -1px #444;
+	-webkit-transition: text-shadow .1s ease-out, background-color .2s ease-out
+	}
 
 .largetext p {
 	font-family: PlutoBold ,Arial,  sans-serif;
 	font-size:4em;
 	text-align: center;
     margin:0;
+    width: 100%
 }
 
 .middletext {
 	width: 100%;
-	font-family: Plutolight ,Arial,  sans-serif;
 	text-align: center;
-	font-size:1.8em;
-	line-height:1.5em;
+	font-size:1.2em;
+	line-height:1.8em;
 	margin: 0;
 }
 
+.subheader {
+	width:100%;
+	line-height: 4.5em;
+	margin:0 auto;
+	-webkit-box-shadow: 0 0 5px 1px #424254;
+	box-shadow: 0 0 5px 1px #424254;
+	background: #64908a; /* Old browsers */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#64908a), color-stop(50%,#50726d), color-stop(100%,#64908a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* W3C */
+}
+.subheader  p {
+	text-align: center;
+	font-family: PlutoBold ,Arial,  sans-serif;
+	font-size:2em;
+	margin: 0;
+	color: white;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+	}
+
+
 .line {
-	height: 0.3em;
-    background: rgba(0,165,255,1);
+	height: 0.1em;
+background: #50726d; /* Old browsers */
+background: -webkit-gradient(linear, left top, right top, color-stop(1%,#50726d), color-stop(50%,#64908a), color-stop(100%,#50726d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* Chrome10+,Safari5.1+ */
+background: linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* W3C */
+margin-left: 1em;
+margin-right: 1em;
 }
 
 
 .swiping {
-	-webkit-animation-name: fade-in;
-	background: white;
+	background: #CC2A41;
 }
 
+#catchswipe {
+	-webkit-transition: background 300ms ease-in;
+	transition: background 300ms ease-in;
+
+}
+
+#swipetax {
+	-webkit-transition: background 300ms ease-in;
+	transition: background 300ms ease-in;
+}
 /*  Pages we don't use */
 
 #tab-bar{
@@ -231,39 +348,118 @@ h1{
     -webkit-touch-callout:none;
 }
 
-
-#pages > div {
-    display: none;
+#home {
+	height: 100%;
 }
- 
+
+#pages {
+	position: relative;
+	height: 100%;
+
+}
+#pages > div {
+  display:none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 #pages > div.current {
-    display: block;
+	display: block;
 }
 
-#pages{
-    position:relative;
-}
- 
-/* Update this style */
- 
-#pages > div {
-    display: none;
-    position: absolute;
-    top:0;left:0;
-    width:100%;
-}
 .in, .out {
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 400ms;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-duration: 300ms;
 }
 @-webkit-keyframes fade-in {
-    from { opacity: 0; } to { opacity: 1; }
+	from { opacity: 0; }
+	to { opacity: 1; } 
 }
+@-webkit-keyframes fade-in {
+	from { opacity: 1; }
+	to { opacity: 0; } 
+}
+
 .fade.in {
-    -webkit-animation-name: fade-in;
-    z-index: 5;
-} 
- 
+	-webkit-animation-name: fade-in;
+/*	z-index: 10;*/
+}
 .fade.out {
-    z-index: 0;
+	-webkit-animation-name: fade-out;
+/*    z-index: 0;*/
+}
+.show.in {
+  z-index: 10;
+  -webkit-animation-name: fade-in;
+  -webkit-animation-duration: 300ms; }
+
+.show.out {
+  z-index: 0;
+}
+
+/* Push in/out */
+@-webkit-keyframes inFromRight {
+from { -webkit-transform: translateX(100%); }
+to { -webkit-transform: translateX(0); } 
+}
+.push.in {
+	-webkit-transform: translateX(0);
+	-o-transform: translateX(0);
+	-webkit-animation-name: inFromRight; 
+}
+
+@-webkit-keyframes outToLeft {
+from { -webkit-transform: translateX(0); }
+to { -webkit-transform: translateX(-100%); }
+}
+.push.out {
+	-webkit-transform: translateX(-100%);
+	-o-transform: translateX(-100%);
+	-webkit-animation-name: outToLeft; 
+}
+
+@-webkit-keyframes inFromLeft {
+from { -webkit-transform: translateX(-100%); }
+to { -webkit-transform: translateX(0); } 
+}
+.push.in.reverse {
+	-o-transform: translateX(0);
+	-webkit-animation-name: inFromLeft; 
+}
+
+@-webkit-keyframes outToRight {
+	from { -webkit-transform: translateX(0); }
+	to { -webkit-transform: translateX(100%); } 
+}
+.push.out.reverse {
+	-o-transform: translateX(100%);
+	-webkit-animation-name: outToRight; 
+}
+
+.flip { 
+  -webkit-animation-duration: .65s; 
+  -webkit-backface-visibility: hidden;
+}
+.flip.in { -webkit-animation-name: flipinfromleft;  }
+.flip.out { opacity:0; -webkit-animation-name: flipouttoleft; }
+.flip.in.reverse { -webkit-animation-name: flipinfromright; }
+.flip.out.reverse { opacity:0; -webkit-animation-name: flipouttoright; }
+
+@-webkit-keyframes flipinfromright {
+  from { -webkit-transform: rotateY(-180deg) scale(0.8); }
+  to { -webkit-transform: rotateY(0) scale(1); }
+}
+@-webkit-keyframes flipinfromleft {
+  from { -webkit-transform: rotateY(180deg) scale(0.8); }
+  to { -webkit-transform: rotateY(0) scale(1); }
+}
+@-webkit-keyframes flipouttoleft {
+  from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+  to { -webkit-transform: rotateY(-180deg) scale(.8); opacity: 1; }
+}
+@-webkit-keyframes flipouttoright {
+  from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+  to { -webkit-transform: rotateY(180deg) scale(.8); opacity: 1; }
 }

@@ -1,87 +1,107 @@
-<!DOCTYPE HTML>
 <html>
   <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-  <title>Frankie Convert2Euro</title> 
-  
+    <title>Frankie | How much Euro</title> 
     <link rel="stylesheet" href="css/style.css">
+</head>
 
-  </head>
-  <body onLoad="onLoad();">
-  <header>
-<h1>How much in Euro</h1>
+<body >
+
+<header>
+	<h1>How much in Euro</h1>
 </header>
- 
+
 <div id="wrapper">
     <div id="main-content">
 		<div id="pages">
-			<div id="home" class="current">
-				<div id="catchswipe">
-				<div id="swipehead" class="middletext">
-						< swipe to change >
-					</div>
-					<div id="dollar" class="largetext">
-						<p>$ 999.99</p>
-					</div>
-					</div>
-				<ul id="buttonwrapper">
+			<div id="home">
+			<ul id="buttonwrapper">
+					<a href="#settingspage">
 					<li id="taxbutton" class="button">
 						<div id="taxhead" class="headsmall">
-							<a href="#taxpage">tax</a>
+							tax
 						</div>
 						<div id="tax" class="boldsmall" >
-							<a href="#taxpage">12%</a>
+							12%
 						</div>
 					</li>
 					<li id="currbutton" class="button">
 						<div id="currhead" class="headsmall">
-							<a href="#currencypage">currency</a>
+							currency
 						</div>
 						<div id="curr" class="boldsmall">
-							<a href="#currencypage">CAN$</a>
+							CAN$
 						</div>
 					</li>
 					<li id="ratebutton" class="button">
 						<div id="ratehead" class="headsmall">
-							<a href="#ratepage">rate</a>
+							rate
 						</div>
 						<div id="rate" class="boldsmall">
-							<a href="#ratepage">0.7</a>
+							0.7
 						</div>
 					</li>
+				</a>			
 				</ul>
-				<div id="wothead" class="middletext">cost without tax</div>
+				<div id="catchswipe" >
+					<div id="dollar" class="largetext">
+						<p>$ 999.99</p>
+					</div>
+					<div id="swipehead">
+						< swipe to change >
+					</div>
+				</div>
+				<div class="line"></div>
+				<div id="wothead" >price without tax</div>
 				<div id="woteuro"  class="largetext">
 					<p>999</p>
 				</div>
 				<div class="line"></div>
-				<div id="wthead" class="middletext">cost with tax</div>
+				<div id="wthead" >price with tax</div>
 				<div id="wteuro"  class="largetext">
 					<p>999</p>
 				</div>
 			</div>
-			<div id="taxpage">
-				<div class="backhome">
-					<a href="#home">< back</a>
-					
+			<div id="settingspage">
+				<div class="subheader">
+				<p>Settings</p>
 				</div>
-		</div>
-			<div id="currencypage">
-				<div class="backhome">
-					<a href="#home">< back</a>
-					
-				</div>
-		</div>
-			<div id="ratepage">
-				<div class="backhome">
-					<a href="#home">< back</a>
-					
-				</div>
-		</div>
-		</div>
 
+					<div id="swipetax">
+						<div id="taxsetting" class="largetext">
+							<p>12 %</p>
+						</div>
+						<div id="taxswipehead" class="middletext">
+							< swipe to change tax >
+						</div>
+					</div>
+				<div class="line"></div>
+				<div id="WhatCurrency" class="centerbuttons">
+					<ul class="currencybar">
+						<li id="CurrUSD">USD</li>
+						<li id="CurrCAD">CAD</li>
+					</ul>
+					
+
+				</div>
+				<div class="line"></div>
+				<div class="centerbuttons">
+					<ul class="currencybar">
+						<li id="updaterates">
+							Update rates
+						</li>
+						<li id="updaterates">
+							Save Settings
+						</li>
+					</ul>
+				</div>
+				<div id="ratestimestamp" class="middletext"></div>
+				<div id="currentrates"class="middletext"></div>
+				The exchange rates are provided by the <a href="http://openexchangerates.org/">Open Source Exchange Rates Project</a>.
+			</div>
+		</div>
 	</div>
 </div>
  
@@ -90,11 +110,11 @@
    <img src="images/logo_frankie.png" height="75%"/>
 </div>
 </footer>
-	<script src="js/phonegap-1.2.0.js"></script>
+	<script src="js/phonegap-1.4.1.js"></script>
     <script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/money.min.js"></script>
 	<script src="js/iscroll-lite.js"></script>
-	<script src="js/app.js"></script>
- 
+	<script src="js/jquery.fittext.js"></script>
+	<script src="js/app.js"></script> 
   </body>
 </html>

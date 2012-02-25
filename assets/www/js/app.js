@@ -1,8 +1,10 @@
 ﻿function onLoad(){
           document.addEventListener("deviceready", onDeviceReady, true);
      }
+     
 function onDeviceReady(){
           navigator.notification.alert("PhoneGap is working!!");
+          alert("PhoneGap is working!!");
      }
 
 var theScroll;
@@ -13,6 +15,12 @@ var valEuro;
 var valEuroTax;
 var originalDollar;
 var currentDolllar;
+var originalTax;
+var currentTax;
+var pageState = {};
+var valtimestamp;
+var mmToMonth = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
 
 
 
@@ -54,23 +62,34 @@ function loadState() {
 }
 // Use jQuery.ajax to get the latest exchange rates, with JSONP:
 // Load exchange rates data via the cross-domain/AJAX proxy:
+function getrates() {
     $.getJSON(
         'http://openexchangerates.org/latest.json',
         function(data) {
-            
 			// Check money.js has finished loading:
             if ( typeof fx !== "undefined" && fx.rates ) {
                 fx.rates = data.rates;
                 fx.base = data.base;
+                window.valtimestamp = data.timestamp;
+				$("#ratestimestamp").html("Latest rates: " + showLocalDate(window.valtimestamp));
+				$('#currentrates').html('1 USD = ' + fx(1).from('USD').to('EUR').toFixed(2) + ' €'+"<br>"+'1 CAD = ' + fx(1).from('CAD').to('EUR').toFixed(2) + ' €' );
+				
             } else {
                 // If not, apply to fxSetup global:
                 var fxSetup = {
                     rates : data.rates,
-                    base : data.base
+                    base : data.base,
                 }
+                 window.valtimestamp = data.timestamp;
+ 			     $("#ratestimestamp").html("Latest rates: " + showLocalDate(window.valtimestamp));
+
             }
         }
     );
+    
+}
+
+//getrates();
 
 if (!loadState()) { 
 	fx.base = "USD";
@@ -86,27 +105,88 @@ if (!loadState()) {
 	}
 	// rates
 
-
-	
 console.log('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
 
 $('#dollar p').html('$ '+ valDollar );
 $('#tax').html(valTax + '%' );
+$('#taxsetting p').html(valTax + '%' );
 $('#rate').html((fx(1).from(strCurrency).to('EUR').toFixed(2)) + ' €' );
 $('#curr').html(strCurrency);
 
+
 calculate();
 
+changePage("#home", "fade");
+
+if (strCurrency =="USD") {
+		$('#CurrUSD').addClass("buttondown");
+	} else {
+		$('#CurrCAD').addClass("buttondown");
+	}
+	
+
+
+
+
+// FUNCTIONS ##########################################################
+
+$('#CurrUSD').on('click', function(e){
+	strCurrency="USD";
+	$('#CurrCAD').toggleClass("buttondown");
+	$('#CurrUSD').toggleClass("buttondown");
+	$('#curr').html(strCurrency);
+	calculate();
+});
+
+$('#CurrCAD').on('click', function(e){
+	strCurrency="CAD";
+	$('#CurrCAD').toggleClass("buttondown");
+	$('#CurrUSD').toggleClass("buttondown");
+	$('#curr').html(strCurrency);
+	calculate();
+});
+
+$('#updaterates').on('click', function(e){
+	alert("update rates");
+	getrates();
+	calculate();
+});
+
+var myScroll;
+function loaded() {
+    myScroll = new iScroll('wrapper', {
+        useTransform: false,
+        onBeforeScrollStart: function (e) {
+            var target = e.target;
+            while (target.nodeType != 1) target = target.parentNode;
+
+            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                e.preventDefault();
+        }
+    });
+		setTimeout(function () {
+		myScroll.refresh();
+	}, 0);
+
+}
+
+// Don't need iScroll
+var theScroll;
 function scroll(){
     theScroll = new iScroll('wrapper');
 }
-	
+
+//document.addEventListener('DOMContentLoaded', scroll, false);
+//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+//document.addEventListener('DOMContentLoaded', loaded, false);
+
+
 function calculate() {
 	//window.valEuro=parseFloat(window.valDollar) * parseFloat(window.valRate);
 	//window.valEuroTax= parseFloat(window.valTax) / 100 * parseFloat(window.valDollar)+parseFloat(window.valDollar);
 	window.valEuro = fx(window.valDollar).from(window.strCurrency).to('EUR');
 	window.valEuroTax = fx(parseFloat(window.valTax) / 100 * parseFloat(window.valDollar)+parseFloat(window.valDollar)).from(window.strCurrency).to('EUR');
-		
+
 	window.valEuroTax=window.valEuroTax.toFixed(2)
 	window.valEuro=window.valEuro.toFixed(2)
 	$('#woteuro p').html(window.valEuro +" €");
@@ -114,22 +194,14 @@ function calculate() {
 	if (window.currentDolllar != window.originalDollar) { saveState(); }
 
 	}
-	
-document.addEventListener('DOMContentLoaded', scroll, false);
+
 
 $('#buttonwrapper a').on('click', function(e){
+    var pageState = {};
     e.preventDefault();
-    var nextPage = $(e.target.hash);
-	page(nextPage); //You need to add this for it to work
-    $("#pages .current").removeClass("current");
-    nextPage.addClass("current");
+	changePage(this.hash, 'push');
 });
 
-function checkInput(textbox) {
- var textInput = document.getElementById(textbox).value;
-
- alert(textInput); 
-}
 
 
 function page(toPage) {
@@ -143,6 +215,7 @@ function page(toPage) {
         toPage.removeClass("fade in")
     });
     fromPage.addClass("fade out");
+	theScroll.refresh();
 }
 
 (function($) {
@@ -150,11 +223,13 @@ $.fn.swipe = function(options) {
     // Default thresholds & swipe functions
     var defaults = {
         threshold: {
-            x: 10,
-            y: 10
+            x: 5,
+            y: 5
         },
         swipeLeft: function() { alert('swiped left') },
         swipeRight: function() { alert('swiped right') },
+        swipeEnd: function() { alert('swipe end') },
+        swipeStart: function() { alert('swipe start') },
         preventDefaultEvents: true
     };
 
@@ -176,9 +251,9 @@ $.fn.swipe = function(options) {
             console.log('Starting swipe gesture...')
             originalCoord.x = event.targetTouches[0].pageX
             originalCoord.y = event.targetTouches[0].pageY
-			$("#catchswipe").addClass("swiping");
-			window.originalDollar = window.valDollar;
-			window.currentDolllar = window.valDollar;
+			defaults.swipeStart();
+			$(this).addClass("swiping");
+
 
         }
 
@@ -188,61 +263,35 @@ $.fn.swipe = function(options) {
                 event.preventDefault();
             finalCoord.x = event.targetTouches[0].pageX // Updated X,Y coordinates
             finalCoord.y = event.targetTouches[0].pageY
-			
-			WchangeX = originalCoord.x - finalCoord.x
-			console.log(WchangeX);
-			
-			//swipe left
-			if(WchangeX > defaults.threshold.x) {
-			
-			
-				if (parseFloat(window.currentDolllar) - (0.1 * WchangeX) > 0) {
-                    
-						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * WchangeX)
-						window.currentDolllar = window.currentDolllar.toFixed(2)
-					} else {
-						window.currentDolllar = 0;
-					}
-					$('#dollar p').html('$ '+ window.currentDolllar );
-			
-			}
-				
-			//swipe right
-                if(WchangeX < (defaults.threshold.x*-1)) {
-					WchangeX = WchangeX * -1
-					window.currentDolllar = parseFloat(originalDollar) + 0.1 * WchangeX
-					window.currentDolllar = window.currentDolllar.toFixed(2)
-					$('#dollar p').html('$ '+ window.currentDolllar );
+
+            var changeY = originalCoord.y - finalCoord.y
+//            if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
+                changeX = originalCoord.x - finalCoord.x
+
+                if(changeX > defaults.threshold.x) {
+                    defaults.swipeLeft(changeX);
                 }
-        }
+                if(changeX < (defaults.threshold.x*-1)) {
+                    defaults.swipeRight(changeX);
+                }
+ //           }
+
+      }
 
         // Done Swiping
         // Swipe should only be on X axis, ignore if swipe on Y axis
         // Calculate if the swipe was left or right
         function touchEnd(event) {
             console.log('Ending swipe gesture...')
-			$("#catchswipe").removeClass("swiping");
-			window.valDollar = window.currentDolllar;
-			calculate();
-			
-
-            var changeY = originalCoord.y - finalCoord.y
-            if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
-                changeX = originalCoord.x - finalCoord.x
-
-                if(changeX > defaults.threshold.x) {
-                    defaults.swipeLeft(changeX)
-                }
-                if(changeX < (defaults.threshold.x*-1)) {
-                    defaults.swipeRight(changeX)
-                }
-            }
+			$(this).removeClass("swiping");
+			defaults.swipeEnd();
         }
 
         // Swipe was canceled
         function touchCancel(event) { 
             console.log('Canceling swipe gesture...')
-			$("#catchswipe").removeClass("swiping");
+			$(this).removeClass("swiping fade in");
+			$(this).addClass("swiping fade out");
         }
 
         // Add gestures to all swipable areas
@@ -257,11 +306,143 @@ $.fn.swipe = function(options) {
 
 $('#catchswipe').swipe({
  swipeLeft: function(chx)  {
+				if (parseFloat(window.currentDolllar) - (0.1 * chx) > 0) {
+                    
+						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * chx)
+						window.currentDolllar = window.currentDolllar.toFixed(2)
+					} else {
+						window.currentDolllar = 0;
+					}
+					$('#dollar p').html('$ '+ window.currentDolllar );
  
  },
  swipeRight: function(chx)  { 
+ 					chx = chx * -1
+					window.currentDolllar = parseFloat(originalDollar) + 0.1 * chx
+					window.currentDolllar = window.currentDolllar.toFixed(2)
+					$('#dollar p').html('$ '+ window.currentDolllar );
+ 
+ },
+ swipeEnd: function()  { 
+ 					window.valDollar = window.currentDolllar;
+					calculate();	
+ 
+ },
+ swipeStart: function()  { 
+			window.originalDollar = window.valDollar;
+			window.currentDolllar = window.valDollar;
+ 
+ },
+})
+
+$('#swipetax').swipe({
+ swipeLeft: function(chx)  {
+				if (parseFloat(window.currenttax) - (0.025 * chx) > 0) {
+                    
+						window.currenttax = parseFloat(window.originalTax) - (0.025 * chx)
+						window.currenttax = window.currenttax.toFixed(1)
+					} else {
+						window.currenttax = 0;
+					}
+					$('#taxsetting p').html(window.currenttax+' %' );
+ 
+ },
+ swipeRight: function(chx)  { 
+ 					chx = chx * -1
+					window.currenttax = parseFloat(originalTax) + 0.025 * chx
+					window.currenttax = window.currenttax.toFixed(1)
+					$('#taxsetting p').html(window.currenttax+' %' );
+ 
+ },
+ swipeEnd: function()  { 
+ 					window.valTax = window.currenttax;
+ 					$('#tax').html(valTax + '%' );
+					calculate();	
+
+ 
+ },
+ swipeStart: function()  { 
+			window.originalTax = window.valTax;
+			window.currenttax = window.valTax;
  
  },
 })
 
 
+window.addEventListener("popstate", function(event) {
+  if(!event.state){ 
+    return;
+  }
+  // Transition back - but in reverse.
+  transition(
+    event.state.page, 
+    event.state.transition, 
+    !event.state.reverse
+  );
+  pageState = {
+    state: {
+      page: event.state.page,
+      transition: event.state.transition,
+      reverse: event.state.reverse
+    },
+    title: "",
+    url: event.state.page
+  };
+}, false);
+
+function changePage(page, type, reverse) {
+  // Store the transition with the state
+  if(pageState.url){
+    // Update the previous transition to be the NEXT transition
+    pageState.state.transition = type;
+    window.history.replaceState(
+      pageState.state,
+      pageState.title,
+      pageState.url);
+  }
+  // Keep the state details for next time!
+  pageState = {
+    state: {
+      page: page,
+      transition: type,
+      reverse: reverse
+    },
+    title: "",
+    url: page
+  };
+  window.history.pushState(pageState.state, pageState.title, pageState.url);  
+  // Do the real transition
+  transition(page, type, reverse);
+}
+
+function transition(toPage, type, reverse){
+  var toPage = $(toPage),
+    fromPage = $("#pages .current"),
+    reverse = reverse ? "reverse" : "";
+
+  if(toPage.hasClass("current") || toPage === fromPage) { 
+    return; 
+  };
+
+  // For non-animatey browsers
+  if(!("WebKitTransitionEvent" in window)){
+      toPage.addClass("current");
+      fromPage.removeClass("current");
+      return;
+  }
+  
+  toPage
+    .addClass("current " + type + " in " + reverse)
+    .one("webkitAnimationEnd", function(){
+      fromPage.removeClass("current " + type + " out " + reverse);
+      toPage.removeClass(type + " in " + reverse);
+    });
+  fromPage.addClass(type + " out " + reverse);
+}
+
+function showLocalDate(timestamp)
+{
+  var dt = new Date(timestamp * 1000);
+  var mm = mmToMonth[dt.getMonth()];
+  return dt.getDate() + "-"+  mm +  "-" + dt.getFullYear() +" "+dt.getHours()+":"+dt.getMinutes();
+}

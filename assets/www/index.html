@@ -9,15 +9,15 @@
 
 <body >
 
-<header>
-	<h1>How much in Euro</h1>
+<header class="gradient1">
+	<h1>How much Euro?</h1>
 </header>
 
-<div id="wrapper">
+<div id="wrapper" class="gradient3">
     <div id="main-content">
-		<div id="pages">
-			<div id="home">
-			<ul id="buttonwrapper">
+		<div id="pages" >
+			<div id="home" >
+			<ul id="buttonwrapper" class="gradient2">
 					<a href="#settingspage">
 					<li id="taxbutton" class="button">
 						<div id="taxhead" class="headsmall">
@@ -37,7 +37,7 @@
 					</li>
 					<li id="ratebutton" class="button">
 						<div id="ratehead" class="headsmall">
-							rate
+							rate 1 =
 						</div>
 						<div id="rate" class="boldsmall">
 							0.7
@@ -49,63 +49,61 @@
 					<div id="dollar" class="largetext">
 						<p>$ 999.99</p>
 					</div>
-					<div id="swipehead">
+					<div id="swipehead" class="undertext">
 						< swipe to change >
 					</div>
 				</div>
-				<div class="line"></div>
-				<div id="wothead" >price without tax</div>
+				<div class="line gradient1"></div>
 				<div id="woteuro"  class="largetext">
 					<p>999</p>
 				</div>
-				<div class="line"></div>
-				<div id="wthead" >price with tax</div>
+				<div id="wothead" class="undertext" >amount without tax</div>
+				<div class="line gradient1"></div>
 				<div id="wteuro"  class="largetext">
 					<p>999</p>
 				</div>
-			</div>
-			<div id="settingspage">
-				<div class="subheader">
-				<p>Settings</p>
+				<div id="wthead" class="undertext" >amount with tax</div>
 				</div>
+			<div id="settingspage">
+				
+				<h1>Settings</h1>
+				<div class="line gradient1"></div>
 
 					<div id="swipetax">
-						<div id="taxsetting" class="largetext">
+						<div id="taxsetting" class="middlelargetext">
 							<p>12 %</p>
 						</div>
-						<div id="taxswipehead" class="middletext">
+						<div id="taxswipehead" class="undertext">
 							< swipe to change tax >
 						</div>
 					</div>
-				<div class="line"></div>
+				<div class="line gradient1"></div>
 				<div id="WhatCurrency" class="centerbuttons">
 					<ul class="currencybar">
-						<li id="CurrUSD">USD</li>
-						<li id="CurrCAD">CAD</li>
+						<li id="CurrUSD" class="gradient2">USD</li>
+						<li id="CurrCAD" class="gradient2">CAD</li>
 					</ul>
 					
 
 				</div>
-				<div class="line"></div>
-				<div class="centerbuttons">
+				<div class="line gradient1"></div>
+				<div id="ratestimestamp"></div>
+				<div id="currentrates"></div>
+				<div class="centerbuttons"  >
 					<ul class="currencybar">
-						<li id="updaterates">
+						<li id="updaterates" class="gradient1" >
 							Update rates
-						</li>
-						<li id="updaterates">
-							Save Settings
 						</li>
 					</ul>
 				</div>
-				<div id="ratestimestamp" class="middletext"></div>
-				<div id="currentrates"class="middletext"></div>
+
 				The exchange rates are provided by the <a href="http://openexchangerates.org/">Open Source Exchange Rates Project</a>.
 			</div>
 		</div>
 	</div>
 </div>
  
-<footer>
+<footer class="gradient1">
 <div id="logo">
    <img src="images/logo_frankie.png" height="75%"/>
 </div>

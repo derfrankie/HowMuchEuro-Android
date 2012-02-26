@@ -1,10 +1,20 @@
 @font-face{
+ font-family: PlutoCondRegular; 
+ src: url('../fonts/PlutoCondRegular.otf') format('opentype');
+ }
+
+@font-face{
+ font-family: PlutoCondBold; 
+ src: url('../fonts/PlutoCondBold.otf') format('opentype');
+ }
+ 
+@font-face{
  font-family: PlutoLight; 
  src: url('../fonts/PlutoCondExtraLight-Italic.otf') format('opentype');
  }
 
 @font-face{
- font-family: PlutoBold; 
+ font-family: PlutoBoldItalic; 
  src: url('../fonts/PlutoCondBold-Italic.otf') format('opentype');
  }
 
@@ -15,13 +25,13 @@ html, body{
 }
  
 body {
- font-family:PlutoLight ,Arial,  sans-serif;
- line-height:2.5;
+ font-family:PlutoCondRegular ,Arial,  sans-serif;
+ line-height:1.2em;
  font-size:1em;
  background: #fff;
  padding:0px;
  background: black;
- color:#351330;
+ color:#283d3e;
  word-wrap: break-word;
  -webkit-text-size-adjust: none;
  text-align: center;
@@ -45,21 +55,15 @@ a:link {
 header{
     top:0; left:0;
     height:3em;
-background: #50726d; /* Old browsers */
-background: -webkit-gradient(linear, left top, right top, color-stop(1%,#50726d), color-stop(50%,#64908a), color-stop(100%,#50726d)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* Chrome10+,Safari5.1+ */
-background: linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* W3C */
-
+	background: #283d3e; /* Old browsers */
 }
 
 
 footer {
     bottom:0; left:0;
     height:3em;
-background: #50726d; /* Old browsers */
-background: -webkit-gradient(linear, left top, right top, color-stop(1%,#50726d), color-stop(50%,#64908a), color-stop(100%,#50726d)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* Chrome10+,Safari5.1+ */
-background: linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* W3C */
+	background: #283d3e; /* Old browsers */
+
 }
  
 header, footer{
@@ -73,8 +77,8 @@ header, footer{
     font-weight:bold;
     text-shadow:0 -1px 0 rgba(0,0,0,0.5);
     line-height:45px;
--webkit-box-shadow: 0 0 5px 1px #424254;
-box-shadow: 0 0 5px 1px #424254;
+	-webkit-box-shadow: 0 0 5px 2px #424254;
+	box-shadow: 0 0 5px 1px #424254;
 }
 
 #logo {
@@ -86,8 +90,9 @@ box-shadow: 0 0 5px 1px #424254;
 
 h1{
     margin:0;
-    font-size:2em;
-	font-family: PlutoBold ,Arial,  sans-serif;
+    font-size:1.5em;
+	line-height:2em;
+	font-family: PlutoCondRegular ,Arial,  sans-serif;
 	color: #FFFFF;
 }
 
@@ -105,10 +110,6 @@ h1{
     top:3em; bottom:3em; left:0;
     width:100%;
     overflow:auto;
-    background: #e8caa4; /* Old browsers */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#e8caa4), color-stop(50%,#ffe5c6), color-stop(100%,#e8caa4)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  #e8caa4 0%,#ffe5c6 50%,#e8caa4 100%); /* Chrome10+,Safari5.1+ */
-	background: linear-gradient(left,  #e8caa4 0%,#ffe5c6 50%,#e8caa4 100%); /* W3C */
 }
  
  
@@ -121,13 +122,6 @@ h1{
 }
 
 
-
-#dollar input {
-    background: none;
-	width: 80%;
-	border: none;
-	color:rgba(255,255,199,1);
-}
 
 .btnOn {
 	background: rgba(255,255,255,.3);
@@ -143,10 +137,6 @@ h1{
 	padding: 0;
 	-webkit-box-shadow: 0 0 5px 1px #424254;
 	box-shadow: 0 0 5px 1px #424254;
-	background: #64908a; /* Old browsers */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#64908a), color-stop(50%,#50726d), color-stop(100%,#64908a)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* Chrome10+,Safari5.1+ */
-	background: linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* W3C */
 }
 
 
@@ -170,32 +160,30 @@ h1{
 	margin:0 auto;
 	padding: 0;
 	text-align: center;
+	line-height: 2em;
 }
 
 .currencybar li {
-    display: inline;
+    border-top: 1px solid #647a99;
+	display: inline;
     float: left;
     width: 7em;
 	margin: 1em;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	-webkit-box-shadow: 0 0 5px 1px #424254;
-	box-shadow: 0 0 5px 1px #424254;
-	background: #64908a; /* Old browsers */
-/*	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#64908a), color-stop(50%,#50726d), color-stop(100%,#64908a)); /* Chrome,Safari4+ */
-/*	background: -webkit-linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* Chrome10+,Safari5.1+ */
-/*	background: linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* W3C */
 	color: white;
-		-webkit-box-shadow: 0 0 5px 1px #424254;
-	box-shadow: 0 0 5px 1px #424254;
+
+
 }
 
+
 .buttondown  {
-	font-family: PlutoBold ,Arial,  sans-serif;
-	-webkit-box-shadow: inset 0 0 5px 1px #424254;
-	box-shadow: inset 0 0 5px 1px #424254;
-	background: #white; !important /* Old browsers */
+	background: rgba(72,88,111,.5); !important /* Old browsers */
+	font-family: PlutoCondBold ,Arial,  sans-serif;
+	-webkit-box-shadow: inset 0 0 3px 1px #424254;
+	box-shadow: inset 0 0 3px 1px #424254;
+
 
 }
 
@@ -216,7 +204,7 @@ h1{
 .backhome {
 	background: rgba(0,165,255,1);
 	color:black;
-	font-family: PlutoBold ,Arial,  sans-serif;
+	font-family: PlutoBoldItalic ,Arial,  sans-serif;
 	font-size:1.5em;
 	margin: 0;
 	border-width: 2px;
@@ -239,7 +227,7 @@ h1{
 
 .boldsmall  {
 	text-align: center;
-	font-family: PlutoBold ,Arial,  sans-serif;
+	font-family: PlutoCondBold ,Arial,  sans-serif;
 	font-size:2em;
 	line-height:1em;
 	margin: 0;
@@ -247,23 +235,48 @@ h1{
 	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
 }
 
+.undertext {
+	line-height: 2.5em;
+}
+
 .boldtext {
-	font-family: PlutoBold ,Arial,  sans-serif;
+	font-family: PlutoCondBold ,Arial,  sans-serif;
 }
 .largetext{
     line-height:3.5em;
     width:100%;
     background-color: none;
-    color: #50726d;
-    margin:1em 0 auto;
+    color: #283d3e;
+    margin: 0;
+	padding-top: 1em;
 	-webkit-background-clip: text;
 	-webkit-text-stroke: 0;
-	text-shadow: 1px 1px white, -1px -1px #444;
+	text-shadow: 1px 1px 2px white, -1px -1px 2px #444;
 	-webkit-transition: text-shadow .1s ease-out, background-color .2s ease-out
 	}
 
+.middlelargetext{
+    line-height:2em;
+    width:100%;
+    background-color: none;
+    color: #283d3e;
+    margin: 0;
+	padding-top: 1em;
+	-webkit-background-clip: text;
+	-webkit-text-stroke: 0;
+	text-shadow: 1px 1px 2px white, -1px -1px 2px #444;
+	-webkit-transition: text-shadow .1s ease-out, background-color .2s ease-out
+	}
+
+.middlelargetext p {
+	font-family: PlutoBoldItalic ,Arial,  sans-serif;
+	font-size:3em;
+	text-align: center;
+    margin:0;
+    width: 100%
+}
 .largetext p {
-	font-family: PlutoBold ,Arial,  sans-serif;
+	font-family: PlutoBoldItalic ,Arial,  sans-serif;
 	font-size:4em;
 	text-align: center;
     margin:0;
@@ -284,14 +297,10 @@ h1{
 	margin:0 auto;
 	-webkit-box-shadow: 0 0 5px 1px #424254;
 	box-shadow: 0 0 5px 1px #424254;
-	background: #64908a; /* Old browsers */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#64908a), color-stop(50%,#50726d), color-stop(100%,#64908a)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* Chrome10+,Safari5.1+ */
-	background: linear-gradient(left,  #64908a 0%,#50726d 50%,#64908a 100%); /* W3C */
 }
 .subheader  p {
 	text-align: center;
-	font-family: PlutoBold ,Arial,  sans-serif;
+	font-family: PlutoCondBold ,Arial,  sans-serif;
 	font-size:2em;
 	margin: 0;
 	color: white;
@@ -301,28 +310,50 @@ h1{
 
 .line {
 	height: 0.1em;
-background: #50726d; /* Old browsers */
-background: -webkit-gradient(linear, left top, right top, color-stop(1%,#50726d), color-stop(50%,#64908a), color-stop(100%,#50726d)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* Chrome10+,Safari5.1+ */
-background: linear-gradient(left,  #50726d 1%,#64908a 50%,#50726d 100%); /* W3C */
-margin-left: 1em;
-margin-right: 1em;
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 
 .swiping {
-	background: #CC2A41;
+	color: #D62E2E;
 }
 
 #catchswipe {
-	-webkit-transition: background 300ms ease-in;
-	transition: background 300ms ease-in;
+	-webkit-transition: color 300ms ease-in;
+	transition: color 300ms ease-in;
 
 }
 
 #swipetax {
-	-webkit-transition: background 300ms ease-in;
-	transition: background 300ms ease-in;
+	-webkit-transition: color 300ms ease-in;
+	transition: color 300ms ease-in;
+}
+
+#ratestimestamp {
+	padding-top: 0.5em;
+}
+
+/*Backgrounds*/
+
+.gradient1	 {
+	background: #283d3e; /* Old browsers */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#283d3e), color-stop(50%,#48586f), color-stop(100%,#283d3e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #283d3e 0%,#48586f 50%,#283d3e 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(left,  #283d3e 0%,#48586f 50%,#283d3e 100%); /* W3C */
+}
+.gradient2 {
+	background: #48586f; /* Old browsers */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#48586f), color-stop(50%,#283d3e), color-stop(100%,#48586f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #48586f 0%,#283d3e 50%,#48586f 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(left,  #48586f 0%,#283d3e 50%,#48586f 100%); /* W3C */
+}
+
+.gradient3 {
+background: rgb(245,246,246); /* Old browsers */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(245,246,246,1)), color-stop(21%,rgba(219,220,226,1)), color-stop(50%,rgba(208,211,224,1)), color-stop(80%,rgba(221,223,227,1)), color-stop(100%,rgba(245,246,246,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(208,211,224,1) 50%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* Chrome10+,Safari5.1+ */
+background: linear-gradient(left,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(208,211,224,1) 50%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* W3C */
 }
 /*  Pages we don't use */
 

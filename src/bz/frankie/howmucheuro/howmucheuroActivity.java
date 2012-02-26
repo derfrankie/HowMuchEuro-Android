@@ -1,10 +1,10 @@
-package derfrankie.convert2euro;
+package bz.frankie.howmucheuro;
 
 import android.app.Activity;
 import android.os.Bundle;
 import com.phonegap.*;
 
-public class Convert2EuroActivity extends DroidGap {
+public class howmucheuroActivity extends DroidGap {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {

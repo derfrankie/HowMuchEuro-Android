@@ -63,7 +63,8 @@ function loadState() {
 // Use jQuery.ajax to get the latest exchange rates, with JSONP:
 // Load exchange rates data via the cross-domain/AJAX proxy:
 function getrates() {
-    $.getJSON(
+    $("#ratestimestamp").html("Requesting rates...");
+	$.getJSON(
         'http://openexchangerates.org/latest.json',
         function(data) {
 			// Check money.js has finished loading:
@@ -72,7 +73,7 @@ function getrates() {
                 fx.base = data.base;
                 window.valtimestamp = data.timestamp;
 				$("#ratestimestamp").html("Latest rates: " + showLocalDate(window.valtimestamp));
-				$('#currentrates').html('1 USD = ' + fx(1).from('USD').to('EUR').toFixed(2) + ' €'+"<br>"+'1 CAD = ' + fx(1).from('CAD').to('EUR').toFixed(2) + ' €' );
+				$('#currentrates').html('1 USD = ' + fx(1).from('USD').to('EUR').toFixed(2) + ' €'+"<br/>"+'1 CAD = ' + fx(1).from('CAD').to('EUR').toFixed(2) + ' €' );
 				
             } else {
                 // If not, apply to fxSetup global:
@@ -120,8 +121,11 @@ changePage("#home", "fade");
 
 if (strCurrency =="USD") {
 		$('#CurrUSD').addClass("buttondown");
+		$('#CurrUSD').toggleClass("gradient2");
 	} else {
 		$('#CurrCAD').addClass("buttondown");
+		$('#CurrCAD').toggleClass("gradient2");
+
 	}
 	
 
@@ -131,23 +135,32 @@ if (strCurrency =="USD") {
 // FUNCTIONS ##########################################################
 
 $('#CurrUSD').on('click', function(e){
-	strCurrency="USD";
-	$('#CurrCAD').toggleClass("buttondown");
-	$('#CurrUSD').toggleClass("buttondown");
-	$('#curr').html(strCurrency);
-	calculate();
+	if (strCurrency == "CAD") {
+		strCurrency="USD";
+		$('#CurrCAD').toggleClass("buttondown");
+		$('#CurrUSD').toggleClass("buttondown");
+		$('#CurrUSD').toggleClass("gradient2");
+		$('#CurrCAD').toggleClass("gradient2");
+		$('#curr').html(strCurrency);
+		calculate();
+	}
 });
 
 $('#CurrCAD').on('click', function(e){
-	strCurrency="CAD";
-	$('#CurrCAD').toggleClass("buttondown");
-	$('#CurrUSD').toggleClass("buttondown");
-	$('#curr').html(strCurrency);
-	calculate();
+	if (strCurrency == "USD") {
+		strCurrency="CAD";
+		$('#CurrCAD').toggleClass("buttondown");
+		$('#CurrUSD').toggleClass("buttondown");
+		$('#CurrUSD').toggleClass("gradient2");
+		$('#CurrCAD').toggleClass("gradient2");
+
+		$('#curr').html(strCurrency);
+		calculate();
+	}
 });
 
 $('#updaterates').on('click', function(e){
-	alert("update rates");
+	//alert("update rates");
 	getrates();
 	calculate();
 });
@@ -177,8 +190,8 @@ function scroll(){
 }
 
 //document.addEventListener('DOMContentLoaded', scroll, false);
-//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-//document.addEventListener('DOMContentLoaded', loaded, false);
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('DOMContentLoaded', loaded, false);
 
 
 function calculate() {

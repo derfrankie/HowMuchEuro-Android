@@ -39,7 +39,7 @@ body {
  
 h1, h2, h3, h4, h5, h6{ font-weight: normal; }
  
-img { float: left; margin: 0 10px 5px 0; padding: 0; }
+img { float: right;  }
  
 img { border: 0; max-width: 100%; }
 
@@ -56,6 +56,7 @@ header{
     top:0; left:0;
     height:3em;
 	background: #283d3e; /* Old browsers */
+	display: inline-block;
 }
 
 
@@ -86,6 +87,16 @@ header, footer{
 	display: inline-block;
     text-align: center;
     vertical-align: middle;
+}
+
+#headlogo {
+	display: inline-block;
+    vertical-align: middle;
+	font-size:1.5em;
+	line-height:2em;
+	font-family: PlutoCondRegular ,Arial,  sans-serif;
+	color: #FFFFF;
+}
 }
 
 h1{

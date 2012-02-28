@@ -3,8 +3,158 @@
      }
      
 function onDeviceReady(){
-          navigator.notification.alert("PhoneGap is working!!");
-          alert("PhoneGap is working!!");
+         // navigator.notification.alert("PhoneGap is working!!");
+	if (!loadState()) { 
+		fx.base = "USD";
+		fx.rates = {
+			"EUR" : 0.74510096, // eg. 1 USD === 0.74510096 EUR
+			"GBP" : 0.64771034,
+			"CAD" : 1.00402,
+			"USD" : 1,          // always include the base rate (1:1)
+		}
+		valDollar = "12";
+		valTax="12";
+		strCurrency="CAD";	
+		}
+
+	if (strCurrency =="USD") {
+			$('#CurrUSD').addClass("buttondown");
+			$('#CurrUSD').toggleClass("gradient2");
+		} else {
+			$('#CurrCAD').addClass("buttondown");
+			$('#CurrCAD').toggleClass("gradient2");
+		}
+
+	
+	console.log('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
+
+	$('#dollar p').html('$ '+ valDollar );
+	$('#tax').html(valTax + '%' );
+	$('#taxsetting p').html(valTax + '%' );
+	$('#rate').html((fx(1).from(strCurrency).to('EUR').toFixed(2)) + ' €' );
+	$('#curr').html(strCurrency);
+	
+	//alert ("2");
+	
+	$('#catchswipe').swipe({
+		swipeLeft: function(chx)  {
+				if (parseFloat(window.currentDolllar) - (0.1 * chx) > 0) {
+                    
+						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * chx)
+						window.currentDolllar = window.currentDolllar.toFixed(2)
+					} else {
+						window.currentDolllar = 0;
+					}
+					$('#dollar p').html('$ '+ window.currentDolllar );
+ 
+		},
+		swipeRight: function(chx)  { 
+ 					chx = chx * -1
+					window.currentDolllar = parseFloat(originalDollar) + 0.1 * chx
+					window.currentDolllar = window.currentDolllar.toFixed(2)
+					$('#dollar p').html('$ '+ window.currentDolllar );
+ 
+		},
+		swipeEnd: function()  { 
+ 					window.valDollar = window.currentDolllar;
+				    trackEvent ("Android","App","SetValue","Dollar", window.currentDolllar);
+					calculate();	
+ 
+		},
+		swipeStart: function()  { 
+			window.originalDollar = window.valDollar;
+			window.currentDolllar = window.valDollar;
+ 
+		},
+	})
+
+	$('#swipetax').swipe({
+		swipeLeft: function(chx)  {
+				if (parseFloat(window.currenttax) - (0.025 * chx) > 0) {
+                    
+						window.currenttax = parseFloat(window.originalTax) - (0.025 * chx)
+						window.currenttax = window.currenttax.toFixed(1)
+					} else {
+						window.currenttax = 0;
+					}
+					$('#taxsetting p').html(window.currenttax+' %' );
+ 
+		},
+		swipeRight: function(chx)  { 
+ 					chx = chx * -1
+					window.currenttax = parseFloat(originalTax) + 0.025 * chx
+					window.currenttax = window.currenttax.toFixed(1)
+					$('#taxsetting p').html(window.currenttax+' %' );
+ 
+		},
+		swipeEnd: function()  { 
+ 					window.valTax = window.currenttax;
+				    trackEvent ("Android","App","SetValue","Tax", window.currenttax);
+
+ 					$('#tax').html(valTax + '%' );
+					calculate();	
+
+ 
+		},
+		swipeStart: function()  { 
+			window.originalTax = window.valTax;
+			window.currenttax = window.valTax;
+ 
+		},
+	})
+
+	$('#buttonwrapper a').on('click', function(e){
+		var pageState = {};
+		e.preventDefault();
+		trackEvent ("Android","App","Button","Settings", 0);
+		changePage(this.hash, 'push');
+	});
+
+	$('#CurrUSD').on('click', function(e){
+		if (strCurrency == "CAD") {
+			strCurrency="USD";
+			$('#CurrCAD').toggleClass("buttondown");
+			$('#CurrUSD').toggleClass("buttondown");
+			$('#CurrUSD').toggleClass("gradient2");
+			$('#CurrCAD').toggleClass("gradient2");
+			$('#curr').html(strCurrency);
+			trackEvent ("Android","App","Button","US Dollar", 0);
+			calculate();
+		}
+	});
+
+	$('#CurrCAD').on('click', function(e){
+		if (strCurrency == "USD") {
+			strCurrency="CAD";
+			$('#CurrCAD').toggleClass("buttondown");
+			$('#CurrUSD').toggleClass("buttondown");
+			$('#CurrUSD').toggleClass("gradient2");
+			$('#CurrCAD').toggleClass("gradient2");
+			trackEvent ("Android","App","Button","CAD Dollar", 0);
+			$('#curr').html(strCurrency);
+			calculate();
+		}
+	});
+
+	$('#updaterates').on('click', function(e){
+		//alert("update rates");
+		trackEvent ("Android","App","Button","Get Rates", 0);
+		getrates();
+		calculate();
+	});
+
+
+	calculate();
+	changePage("#home", "fade");
+
+
+	startAnalytics("Android","UA-29336779-1");
+	trackEvent ("Android","App","Started","Version", appVersion);
+	watchForShake(5);	
+	
+
+
+//end loaded
      }
 
 var theScroll;
@@ -20,8 +170,11 @@ var currentTax;
 var pageState = {};
 var valtimestamp;
 var mmToMonth = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+var prevX;
+var appVersion = "0.5";
 
 
+//document.addEventListener('deviceready', loaded2, false);
 
 
 //storage
@@ -87,83 +240,17 @@ function getrates() {
             }
         }
     );
-    
+    trackEvent ("Android","API","Request","OpenExchange", 0);
 }
 
 //getrates();
 
-if (!loadState()) { 
-	fx.base = "USD";
-	fx.rates = {
-		"EUR" : 0.74510096, // eg. 1 USD === 0.74510096 EUR
-		"GBP" : 0.64771034,
-		"CAD" : 1.00402,
-		"USD" : 1,          // always include the base rate (1:1)
-	}
-	valDollar = "12";
-	valTax="12";
-	strCurrency="CAD";	
-	}
-	// rates
-
-console.log('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
-
-$('#dollar p').html('$ '+ valDollar );
-$('#tax').html(valTax + '%' );
-$('#taxsetting p').html(valTax + '%' );
-$('#rate').html((fx(1).from(strCurrency).to('EUR').toFixed(2)) + ' €' );
-$('#curr').html(strCurrency);
-
-
-calculate();
-
-changePage("#home", "fade");
-
-if (strCurrency =="USD") {
-		$('#CurrUSD').addClass("buttondown");
-		$('#CurrUSD').toggleClass("gradient2");
-	} else {
-		$('#CurrCAD').addClass("buttondown");
-		$('#CurrCAD').toggleClass("gradient2");
-
-	}
-	
 
 
 
 
 // FUNCTIONS ##########################################################
 
-$('#CurrUSD').on('click', function(e){
-	if (strCurrency == "CAD") {
-		strCurrency="USD";
-		$('#CurrCAD').toggleClass("buttondown");
-		$('#CurrUSD').toggleClass("buttondown");
-		$('#CurrUSD').toggleClass("gradient2");
-		$('#CurrCAD').toggleClass("gradient2");
-		$('#curr').html(strCurrency);
-		calculate();
-	}
-});
-
-$('#CurrCAD').on('click', function(e){
-	if (strCurrency == "USD") {
-		strCurrency="CAD";
-		$('#CurrCAD').toggleClass("buttondown");
-		$('#CurrUSD').toggleClass("buttondown");
-		$('#CurrUSD').toggleClass("gradient2");
-		$('#CurrCAD').toggleClass("gradient2");
-
-		$('#curr').html(strCurrency);
-		calculate();
-	}
-});
-
-$('#updaterates').on('click', function(e){
-	//alert("update rates");
-	getrates();
-	calculate();
-});
 
 var myScroll;
 function loaded() {
@@ -183,6 +270,7 @@ function loaded() {
 
 }
 
+
 // Don't need iScroll
 var theScroll;
 function scroll(){
@@ -190,8 +278,10 @@ function scroll(){
 }
 
 //document.addEventListener('DOMContentLoaded', scroll, false);
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-document.addEventListener('DOMContentLoaded', loaded, false);
+//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+//document.addEventListener('DOMContentLoaded', loaded, false);
+
+
 
 
 function calculate() {
@@ -209,11 +299,7 @@ function calculate() {
 	}
 
 
-$('#buttonwrapper a').on('click', function(e){
-    var pageState = {};
-    e.preventDefault();
-	changePage(this.hash, 'push');
-});
+
 
 
 
@@ -228,7 +314,7 @@ function page(toPage) {
         toPage.removeClass("fade in")
     });
     fromPage.addClass("fade out");
-	theScroll.refresh();
+    trackPage ("Android",toPage);
 }
 
 (function($) {
@@ -317,70 +403,6 @@ $.fn.swipe = function(options) {
 };
 })(jQuery);
 
-$('#catchswipe').swipe({
- swipeLeft: function(chx)  {
-				if (parseFloat(window.currentDolllar) - (0.1 * chx) > 0) {
-                    
-						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * chx)
-						window.currentDolllar = window.currentDolllar.toFixed(2)
-					} else {
-						window.currentDolllar = 0;
-					}
-					$('#dollar p').html('$ '+ window.currentDolllar );
- 
- },
- swipeRight: function(chx)  { 
- 					chx = chx * -1
-					window.currentDolllar = parseFloat(originalDollar) + 0.1 * chx
-					window.currentDolllar = window.currentDolllar.toFixed(2)
-					$('#dollar p').html('$ '+ window.currentDolllar );
- 
- },
- swipeEnd: function()  { 
- 					window.valDollar = window.currentDolllar;
-					calculate();	
- 
- },
- swipeStart: function()  { 
-			window.originalDollar = window.valDollar;
-			window.currentDolllar = window.valDollar;
- 
- },
-})
-
-$('#swipetax').swipe({
- swipeLeft: function(chx)  {
-				if (parseFloat(window.currenttax) - (0.025 * chx) > 0) {
-                    
-						window.currenttax = parseFloat(window.originalTax) - (0.025 * chx)
-						window.currenttax = window.currenttax.toFixed(1)
-					} else {
-						window.currenttax = 0;
-					}
-					$('#taxsetting p').html(window.currenttax+' %' );
- 
- },
- swipeRight: function(chx)  { 
- 					chx = chx * -1
-					window.currenttax = parseFloat(originalTax) + 0.025 * chx
-					window.currenttax = window.currenttax.toFixed(1)
-					$('#taxsetting p').html(window.currenttax+' %' );
- 
- },
- swipeEnd: function()  { 
- 					window.valTax = window.currenttax;
- 					$('#tax').html(valTax + '%' );
-					calculate();	
-
- 
- },
- swipeStart: function()  { 
-			window.originalTax = window.valTax;
-			window.currenttax = window.valTax;
- 
- },
-})
-
 
 window.addEventListener("popstate", function(event) {
   if(!event.state){ 
@@ -404,6 +426,8 @@ window.addEventListener("popstate", function(event) {
 }, false);
 
 function changePage(page, type, reverse) {
+  
+  trackPage ("Android",page);
   // Store the transition with the state
   if(pageState.url){
     // Update the previous transition to be the NEXT transition
@@ -458,4 +482,35 @@ function showLocalDate(timestamp)
   var dt = new Date(timestamp * 1000);
   var mm = mmToMonth[dt.getMonth()];
   return dt.getDate() + "-"+  mm +  "-" + dt.getFullYear() +" "+dt.getHours()+":"+dt.getMinutes();
+}
+
+function watchForShake(threshold)
+{
+   var axl = new Accelerometer(); 
+   axl.watchAcceleration(
+       function (Accel)
+       {
+           if (true === Accel.is_updating){
+               return;
+           }
+           var diffX = Math.abs(Accel.x) - prevX;
+ 
+           if (diffX >= threshold)
+           {
+               trackEvent ("Android","App","Shake","Reset Dollar", valDollar);
+			   valDollar = "0";
+			   $('#dollar p').html('$ '+ valDollar );
+               calculate();
+           }
+          prevX = Math.abs(Accel.x);
+       }
+     , function(){}
+     , {frequency : 100}
+   );
+}
+
+
+function loaded2() {
+
+
 }

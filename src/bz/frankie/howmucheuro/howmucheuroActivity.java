@@ -2,6 +2,7 @@ package bz.frankie.howmucheuro;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import com.phonegap.*;
 
 public class howmucheuroActivity extends DroidGap {

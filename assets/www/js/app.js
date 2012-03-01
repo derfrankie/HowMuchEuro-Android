@@ -25,7 +25,7 @@ function onDeviceReady(){
 			$('#CurrCAD').toggleClass("gradient2");
 		}
 
-	
+
 	console.log('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
 
 	$('#dollar p').html('$ '+ valDollar );
@@ -33,9 +33,9 @@ function onDeviceReady(){
 	$('#taxsetting p').html(valTax + '%' );
 	$('#rate').html((fx(1).from(strCurrency).to('EUR').toFixed(2)) + ' €' );
 	$('#curr').html(strCurrency);
-	
+
 	//alert ("2");
-	
+
 	$('#catchswipe').swipe({
 		swipeLeft: function(chx)  {
 				if (parseFloat(window.currentDolllar) - (0.1 * chx) > 0) {
@@ -151,7 +151,7 @@ function onDeviceReady(){
 	startAnalytics("Android","UA-29336779-1");
 	trackEvent ("Android","App","Started","Version", appVersion);
 	watchForShake(5);	
-	
+
 
 
 //end loaded
@@ -227,7 +227,7 @@ function getrates() {
                 window.valtimestamp = data.timestamp;
 				$("#ratestimestamp").html("Latest rates: " + showLocalDate(window.valtimestamp));
 				$('#currentrates').html('1 USD = ' + fx(1).from('USD').to('EUR').toFixed(2) + ' €'+"<br/>"+'1 CAD = ' + fx(1).from('CAD').to('EUR').toFixed(2) + ' €' );
-				
+
             } else {
                 // If not, apply to fxSetup global:
                 var fxSetup = {
@@ -472,7 +472,7 @@ function transition(toPage, type, reverse){
     .addClass("current " + type + " in " + reverse)
     .one("webkitAnimationEnd", function(){
       fromPage.removeClass("current " + type + " out " + reverse);
-      toPage.removeClass(type + " in " + reverse);
+      toPage.removeClass(type + " in " + reverse);	
     });
   fromPage.addClass(type + " out " + reverse);
 }

@@ -1,28 +1,38 @@
-﻿function onLoad(){
-          document.addEventListener("deviceready", onDeviceReady, true);
-     }
+﻿function onLoad() {
+
+document.addEventListener("deviceready", onDeviceReady, true);
+//then add this (for safari
+
+/*if(! window.device) {
+    onDeviceReady();
+}*/
+}
      
-function onDeviceReady(){
-         // navigator.notification.alert("PhoneGap is working!!");
+function onDeviceReady() {
+//         navigator.notification.alert("PhoneGap is working!!");
+Setlanguage();
+ShowDeviceElements();
+
 	if (!loadState()) { 
 		fx.base = "USD";
 		fx.rates = {
 			"EUR" : 0.74510096, // eg. 1 USD === 0.74510096 EUR
 			"GBP" : 0.64771034,
 			"CAD" : 1.00402,
-			"USD" : 1,          // always include the base rate (1:1)
-		}
+			"USD" : 1          // always include the base rate (1:1)
+		};
 		valDollar = "12";
 		valTax="12";
 		strCurrency="CAD";	
 		}
 
-	if (strCurrency =="USD") {
+	if (strCurrency === "USD") {
 			$('#CurrUSD').addClass("buttondown");
-			$('#CurrUSD').toggleClass("gradient2");
+			//$('#CurrUSD').toggleClass("gradient2");
+			
 		} else {
+			//$('#CurrCAD').toggleClass("gradient2");
 			$('#CurrCAD').addClass("buttondown");
-			$('#CurrCAD').toggleClass("gradient2");
 		}
 
 
@@ -34,14 +44,12 @@ function onDeviceReady(){
 	$('#rate').html((fx(1).from(strCurrency).to('EUR').toFixed(2)) + ' €' );
 	$('#curr').html(strCurrency);
 
-	//alert ("2");
-
 	$('#catchswipe').swipe({
 		swipeLeft: function(chx)  {
 				if (parseFloat(window.currentDolllar) - (0.1 * chx) > 0) {
                     
-						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * chx)
-						window.currentDolllar = window.currentDolllar.toFixed(2)
+						window.currentDolllar = parseFloat(window.originalDollar) - (0.1 * chx);
+						window.currentDolllar = window.currentDolllar.toFixed(2);
 					} else {
 						window.currentDolllar = 0;
 					}
@@ -49,15 +57,15 @@ function onDeviceReady(){
  
 		},
 		swipeRight: function(chx)  { 
- 					chx = chx * -1
-					window.currentDolllar = parseFloat(originalDollar) + 0.1 * chx
-					window.currentDolllar = window.currentDolllar.toFixed(2)
+ 					chx = chx * -1;
+					window.currentDolllar = parseFloat(originalDollar) + 0.1 * chx;
+					window.currentDolllar = window.currentDolllar.toFixed(2);
 					$('#dollar p').html('$ '+ window.currentDolllar );
  
 		},
 		swipeEnd: function()  { 
  					window.valDollar = window.currentDolllar;
-				    trackEvent ("Android","App","SetValue","Dollar", window.currentDolllar);
+				    trackEvent ("App","SetValue","Dollar", window.currentDolllar);
 					calculate();	
  
 		},
@@ -65,15 +73,16 @@ function onDeviceReady(){
 			window.originalDollar = window.valDollar;
 			window.currentDolllar = window.valDollar;
  
-		},
-	})
+		}
+	});
+	
 
 	$('#swipetax').swipe({
 		swipeLeft: function(chx)  {
 				if (parseFloat(window.currenttax) - (0.025 * chx) > 0) {
                     
-						window.currenttax = parseFloat(window.originalTax) - (0.025 * chx)
-						window.currenttax = window.currenttax.toFixed(1)
+						window.currenttax = parseFloat(window.originalTax) - (0.025 * chx);
+						window.currenttax = window.currenttax.toFixed(1);
 					} else {
 						window.currenttax = 0;
 					}
@@ -81,7 +90,7 @@ function onDeviceReady(){
  
 		},
 		swipeRight: function(chx)  { 
- 					chx = chx * -1
+ 					chx = chx * -1;
 					window.currenttax = parseFloat(originalTax) + 0.025 * chx
 					window.currenttax = window.currenttax.toFixed(1)
 					$('#taxsetting p').html(window.currenttax+' %' );
@@ -89,7 +98,7 @@ function onDeviceReady(){
 		},
 		swipeEnd: function()  { 
  					window.valTax = window.currenttax;
-				    trackEvent ("Android","App","SetValue","Tax", window.currenttax);
+				    trackEvent ("App","SetValue","Tax", window.currenttax);
 
  					$('#tax').html(valTax + '%' );
 					calculate();	
@@ -100,56 +109,69 @@ function onDeviceReady(){
 			window.originalTax = window.valTax;
 			window.currenttax = window.valTax;
  
-		},
-	})
+		}
+	});
 
 	$('#buttonwrapper a').on('click', function(e){
 		var pageState = {};
 		e.preventDefault();
-		trackEvent ("Android","App","Button","Settings", 0);
 		changePage(this.hash, 'push');
+		trackEvent ("App","Button","Settings", 0);
+
 	});
 
+	$('#wrench a').on('click', function(e){
+							 var pageState = {};
+							 e.preventDefault();
+							 trackEvent ("App","Button","Settings", 0);
+							 changePage(this.hash, 'push');
+							 });
+	
 	$('#CurrUSD').on('click', function(e){
-		if (strCurrency == "CAD") {
+		if (strCurrency === "CAD") {
 			strCurrency="USD";
 			$('#CurrCAD').toggleClass("buttondown");
 			$('#CurrUSD').toggleClass("buttondown");
-			$('#CurrUSD').toggleClass("gradient2");
-			$('#CurrCAD').toggleClass("gradient2");
+			//$('#CurrUSD').toggleClass("gradient2");
+			//$('#CurrCAD').toggleClass("gradient2");
 			$('#curr').html(strCurrency);
-			trackEvent ("Android","App","Button","US Dollar", 0);
+			trackEvent ("App","Button","US Dollar", 0);
 			calculate();
 		}
 	});
 
 	$('#CurrCAD').on('click', function(e){
-		if (strCurrency == "USD") {
+		if (strCurrency === "USD") {
 			strCurrency="CAD";
 			$('#CurrCAD').toggleClass("buttondown");
 			$('#CurrUSD').toggleClass("buttondown");
-			$('#CurrUSD').toggleClass("gradient2");
-			$('#CurrCAD').toggleClass("gradient2");
-			trackEvent ("Android","App","Button","CAD Dollar", 0);
+			//$('#CurrUSD').toggleClass("gradient2");
+			//$('#CurrCAD').toggleClass("gradient2");
+			trackEvent ("App","Button","CAD Dollar", 0);
 			$('#curr').html(strCurrency);
 			calculate();
 		}
 	});
 
 	$('#updaterates').on('click', function(e){
-		//alert("update rates");
-		trackEvent ("Android","App","Button","Get Rates", 0);
-		getrates();
-		calculate();
-	});
+						 //alert("update rates");
+						 trackEvent ("App","Button","Get Rates", 0);
+						 getrates();
+						 calculate();
+						 });
 
+	$(".back").live("click",function(e){
+					e.preventDefault();
+					window.history.back();
+					});
 
 	calculate();
-	changePage("#home", "fade");
+	//alert ("show page");
+	changePage("#home", "show");
+	
 
-
-	startAnalytics("Android","UA-29336779-1");
-	trackEvent ("Android","App","Started","Version", appVersion);
+	startAnalytics("UA-29336779-1");
+	trackEvent ("App","Started","Version" + appVersion, appVersion);
 	watchForShake(5);	
 
 
@@ -171,11 +193,7 @@ var pageState = {};
 var valtimestamp;
 var mmToMonth = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 var prevX;
-var appVersion = "0.5";
-
-
-//document.addEventListener('deviceready', loaded2, false);
-
+var appVersion = "1.0";
 
 //storage
 
@@ -201,7 +219,7 @@ function saveState() {
 
 function loadState() {
 	if (!supports_html5_storage()) { return false; }
-	nfirstime = (localStorage["convert2euro.base"] == "USD");
+	nfirstime = (localStorage["convert2euro.base"] === "USD");
     if (!nfirstime) { 
 	return false; }
 	fx.base = localStorage["convert2euro.base"];
@@ -232,15 +250,15 @@ function getrates() {
                 // If not, apply to fxSetup global:
                 var fxSetup = {
                     rates : data.rates,
-                    base : data.base,
-                }
+                    base : data.base
+                };
                  window.valtimestamp = data.timestamp;
  			     $("#ratestimestamp").html("Latest rates: " + showLocalDate(window.valtimestamp));
 
             }
         }
     );
-    trackEvent ("Android","API","Request","OpenExchange", 0);
+    trackEvent ("API","Request","OpenExchange", 0);
 }
 
 //getrates();
@@ -308,13 +326,13 @@ function page(toPage) {
     fromPage = $("#pages .current");
     if(toPage.hasClass("current") || toPage === fromPage) {
         return;
-    };
+    }
     toPage.addClass("current fade in").one("webkitAnimationEnd", function(){
         fromPage.removeClass("current fade out");
         toPage.removeClass("fade in")
     });
     fromPage.addClass("fade out");
-    trackPage ("Android",toPage);
+    trackPage (toPage);
 }
 
 (function($) {
@@ -330,7 +348,7 @@ $.fn.swipe = function(options) {
         swipeEnd: function() { alert('swipe end') },
         swipeStart: function() { alert('swipe start') },
         preventDefaultEvents: true
-    };
+    }
 
     var options = $.extend(defaults, options);
 
@@ -400,7 +418,7 @@ $.fn.swipe = function(options) {
         this.addEventListener("touchcancel", touchCancel, false);
 
     });
-};
+}
 })(jQuery);
 
 
@@ -427,7 +445,8 @@ window.addEventListener("popstate", function(event) {
 
 function changePage(page, type, reverse) {
   
-  trackPage ("Android",page);
+  //alert('Changepage invoked: " + page+" "+type+" "+reverse');
+  trackPage (page);
   // Store the transition with the state
   if(pageState.url){
     // Update the previous transition to be the NEXT transition
@@ -447,6 +466,7 @@ function changePage(page, type, reverse) {
     title: "",
     url: page
   };
+  //alert("History Push " + pageState.url);
   window.history.pushState(pageState.state, pageState.title, pageState.url);  
   // Do the real transition
   transition(page, type, reverse);
@@ -457,6 +477,19 @@ function transition(toPage, type, reverse){
     fromPage = $("#pages .current"),
     reverse = reverse ? "reverse" : "";
 
+	if( window.device) {
+	switch (device.platform) 
+	{
+	case "iPhone":
+	toPage.find(".back").toggle(true);
+	break;
+	
+	default:
+	break;
+	
+	}
+	}
+	
   if(toPage.hasClass("current") || toPage === fromPage) { 
     return; 
   };
@@ -494,10 +527,11 @@ function watchForShake(threshold)
                return;
            }
            var diffX = Math.abs(Accel.x) - prevX;
- 
+		   
+						 
            if (diffX >= threshold)
            {
-               trackEvent ("Android","App","Shake","Reset Dollar", valDollar);
+               trackEvent ("App","Shake","Reset Dollar", valDollar);
 			   valDollar = "0";
 			   $('#dollar p').html('$ '+ valDollar );
                calculate();
@@ -509,8 +543,73 @@ function watchForShake(threshold)
    );
 }
 
+function Setlanguage() {
 
-function loaded2() {
+var lang;
+var workstring;
 
+// PhoneGap on Android would always return EN in navigator.*language.
+// Parse userAgent instead
+// Mozilla/5.0 (Linux; U; Android 2.2; de-ch; HTC Desire Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+if ( navigator && navigator.userAgent
+        && (lang = navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))
+) {
+        lang = lang[1];
+}
 
+if (!lang && navigator) {
+        if (navigator.language) {
+                lang = navigator.language;
+        } else if (navigator.browserLanguage) {
+                lang = navigator.browserLanguage;
+        } else if (navigator.systemLanguage) {
+                lang = navigator.systemLanguage;
+        } else if (navigator.userLanguage) {
+                lang = navigator.userLanguage;
+        }
+        lang = lang.substr(0, 2);
+}
+
+switch(lang)
+{
+	case "en":
+	workstring = strings_en;
+	break;
+	
+	case "de":
+	workstring = strings_de;
+	break;
+	
+	default:
+	workstring = strings_en;
+	break;
+
+}
+
+$.each(workstring,function(key, value) {
+$('#'+key).html(value);
+console.log('#'+key+ " " + value);
+});
+
+}
+
+function ShowDeviceElements() {
+if( window.device) {
+	switch (device.platform) 
+	{
+	case "Android":
+	$(".triangle").toggle(true);
+	break;
+	
+	default:
+	break;
+	
+	}
+	}
+}
+
+function backKeyDown() { 
+    // do something here if you wish
+     alert('go back!');
+	 window.history.back();
 }

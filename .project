@@ -30,4 +30,10 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>HowMuchEuro_Assets</name>
+			<value>$%7BWORKSPACE_LOC%7D/HowMuchEuro-common/assets/www</value>
+		</variable>
+	</variableList>
 </projectDescription>

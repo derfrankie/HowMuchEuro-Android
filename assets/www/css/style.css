@@ -50,6 +50,7 @@ a { text-decoration: none;}
 a:link {
   -webkit-tap-highlight-color: transparent; }
 
+
 /*  Main Styles */
  
 header{
@@ -58,6 +59,27 @@ header{
 	background: #283d3e; /* Old browsers */
 	display: inline-block;
 }
+
+.back {
+	background: #48586f; /* Old browsers */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#48586f), color-stop(50%,#283d3e), color-stop(100%,#48586f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #48586f 0%,#283d3e 50%,#48586f 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(left,  #48586f 0%,#283d3e 50%,#48586f 100%); /* W3C */	border-top: 1px solid #647a99;
+	display: none;
+    float: left;
+    margin: 1em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: white;
+	padding: 0.4em 0.6em 0.5em 0.6em;
+	position: absolute;
+    text-decoration: none;
+    text-transform: none;
+    top: -0.1 em;
+    left: 0.1em;
+	 }
+
 
 
 footer {
@@ -83,11 +105,20 @@ header, footer{
 }
 
 #logo {
-	margin-top: 5px;
+	margin-top: 0.5em;
 	display: inline-block;
-    text-align: center;
+	float:left;
     vertical-align: middle;
+	margin-left: 1em;
 }
+#wrench {
+	margin-top: 0.5em;
+	display: inline-block;
+    vertical-align: middle;
+	float: right;
+	margin-right:0.2 em;
+}
+
 
 #headlogo {
 	display: inline-block;
@@ -97,7 +128,7 @@ header, footer{
 	font-family: PlutoCondRegular ,Arial,  sans-serif;
 	color: #FFFFF;
 }
-}
+
 
 h1{
     margin:0;
@@ -108,11 +139,11 @@ h1{
 }
 
 #home {
-	height:100%;
+	height: auto;
 	}
 
 #settingspage {
-	height:100%;
+	height: auto;
 	}
 	
 #wrapper {
@@ -120,7 +151,9 @@ h1{
     z-index:1;
     top:3em; bottom:3em; left:0;
     width:100%;
-    overflow:auto;
+    /*overflow:auto;*/
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
 }
  
  
@@ -144,6 +177,12 @@ h1{
 	z-index: 5;
 	margin-top: -.8em;
 	-webkit-transform:rotate(45deg);
+	display: none;
+}
+
+.wrench {
+float: right;
+margin-left: 1em;
 }
 
 
@@ -163,8 +202,13 @@ h1{
 	box-shadow: 0 0 5px 1px #424254;
 }
 
-
-
+#sethead {
+    margin:0;
+    font-size:1.5em;
+	line-height:2em;
+	font-family: PlutoCondRegular ,Arial,  sans-serif;
+	color: #FFFFF;
+}
 .subheader:after {
     clear: both; }
 
@@ -177,6 +221,7 @@ h1{
 	display: table;   /* Allow the centering to work */
 	margin: 0 auto;
 }
+
 
 .currencybar {
 	width:100%;
@@ -191,19 +236,17 @@ h1{
     border-top: 1px solid #647a99;
 	display: inline;
     float: left;
-    width: 7em;
+	padding-left: 2em;
+	padding-right: 2em;
 	margin: 1em;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	color: white;
-
-
 }
 
-
 .buttondown  {
-	background: rgba(72,88,111,.5); !important /* Old browsers */
+	background: rgba(72,88,111,.5)  !important; /* Old browsers */
 	font-family: PlutoCondBold ,Arial,  sans-serif;
 	-webkit-box-shadow: inset 0 0 3px 1px #424254;
 	box-shadow: inset 0 0 3px 1px #424254;
@@ -225,20 +268,6 @@ h1{
 
 }
 
-.backhome {
-	background: rgba(0,165,255,1);
-	color:black;
-	font-family: PlutoBoldItalic ,Arial,  sans-serif;
-	font-size:1.5em;
-	margin: 0;
-	border-width: 2px;
-	border-top-style: solid;
-	border-color:#black;
-}
-
-.backhome  a{
-	color:black;
-}
 .headsmall {
 	text-align: center;
 	font-family: Plutolight ,Arial,  sans-serif;
@@ -271,6 +300,7 @@ h1{
     width:100%;
     background-color: none;
     color: #283d3e;
+	/* color: gradient2;*/
     margin: 0;
 	padding-top: 1em;
 	-webkit-background-clip: text;
@@ -331,6 +361,223 @@ h1{
 	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
 	}
 
+
+/* hacking the sizes */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 479px) {
+/* Styles */
+
+
+
+.subheader {
+	line-height: 3.5em;
+}
+.subheader  p {
+	font-size:1.5em;
+	}
+
+.largetext{
+    line-height:3.3em;
+	}
+
+.largetext p {
+	font-size:4em;
+}
+.middlelargetext{
+    line-height:1em;
+	}
+
+.middlelargetext p {
+	font-size:2em;
+}
+
+#buttonwrapper {
+	height: 3.5em;
+}
+.headsmall {
+	font-size:1em;
+	line-height:1.5em;
+}
+
+.boldsmall  {
+	font-size:1.5em;
+	line-height:1.5em;
+}
+
+.undertext {
+	line-height: 2em;
+}
+
+}
+
+@media only screen
+and (min-device-width : 480px)
+and (max-device-width : 600px) {
+
+.subheader {
+	line-height: 4.5em;
+}
+.subheader  p {
+	font-size:2em;
+	}
+
+.largetext{
+    line-height:3.5em;
+	}
+
+.largetext p {
+	font-size:4em;
+}
+.middlelargetext{
+    line-height:2em;
+	}
+
+.middlelargetext p {
+	font-size:3em;
+}
+
+#buttonwrapper {
+	height: 4.5em;
+}
+.headsmall {
+	font-size:1em;
+	line-height:2em;
+}
+
+.boldsmall  {
+	font-size:2em;
+	line-height:1em;
+}
+
+.undertext {
+	line-height: 2.5em;
+}
+}
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+/* Styles */
+}
+
+/* Tablets 600 width (portrait) ----------- */
+@media only screen
+and (min-device-width : 600px)
+and (max-device-width : 768px)
+and (orientation : portrait) {
+/* Styles */
+
+.subheader {
+	line-height: 3.5em;
+}
+.subheader  p {
+	font-size:1.5em;
+	}
+
+.largetext{
+    line-height:11em;
+	}
+
+.largetext p {
+	font-size:9em;
+}
+.middlelargetext{
+    line-height:11em;
+	}
+
+.middlelargetext p {
+	font-size:9em;
+}
+
+.undertext {
+	line-height: 2.3em;
+	font-size: 2em;
+}
+
+}
+
+
+
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+/* Styles */
+
+.subheader {
+	line-height: 3.5em;
+}
+.subheader  p {
+	font-size:1.5em;
+	}
+
+.largetext{
+    line-height:11em;
+	}
+
+.largetext p {
+	font-size:11em;
+}
+.middlelargetext{
+    line-height:11em;
+	}
+
+.middlelargetext p {
+	font-size:11em;
+}
+
+.undertext {
+	line-height: 2.3em;
+	font-size: 2em;
+}
+
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+/* kjashakkjkdsa */
 
 .line {
 	height: 0.1em;
@@ -409,9 +656,9 @@ background: linear-gradient(left,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21
 
 #pages {
 	position: relative;
-	height: 100%;
-
+	height: auto;
 }
+
 #pages > div {
   display:none;
   position: absolute;
@@ -517,4 +764,8 @@ to { -webkit-transform: translateX(0); }
 @-webkit-keyframes flipouttoright {
   from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
   to { -webkit-transform: rotateY(180deg) scale(.8); opacity: 1; }
+  
+
 }
+
+

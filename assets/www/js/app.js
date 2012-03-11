@@ -557,7 +557,9 @@ if ( navigator && navigator.userAgent
         lang = lang[1];
 }
 
+
 if (!lang && navigator) {
+
         if (navigator.language) {
                 lang = navigator.language;
         } else if (navigator.browserLanguage) {
@@ -567,7 +569,7 @@ if (!lang && navigator) {
         } else if (navigator.userLanguage) {
                 lang = navigator.userLanguage;
         }
-        lang = lang.substr(0, 2);
+		lang = lang.substr(0, 2);
 }
 
 switch(lang)

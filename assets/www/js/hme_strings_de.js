@@ -2,7 +2,7 @@
     "taxhead": "Steuer",
     "currhead": "Währung",
 	"ratehead": "Kurs 1$=",
-	"swipehead": "< Swipe = Ändern / Schütteln = Zurückzusetzen >",
+	"swipehead": "< Swipe = Ändern / Schütteln = $0 >",
 	"wothead": "Betrag ohne Steuer",
 	"wthead": "Betrag mit Steuer",
 	"sethead": "Einstellungen",

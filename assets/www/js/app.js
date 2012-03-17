@@ -1,15 +1,25 @@
 ﻿function onLoad() {
 
-document.addEventListener("deviceready", onDeviceReady, true);
+document.addEventListener("deviceready", onDeviceReady, false);
 //then add this (for safari
 
 /*if(! window.device) {
     onDeviceReady();
 }*/
+
+   //if phonegap, need to toggle these
+/*         if (typeof navigator.device == "undefined"){
+         alert("use standard");
+              document.addEventListener("deviceready", onDeviceReady, false);
+         } else {
+                  alert("call directly");
+         onDeviceReady();
+         }
+*/
 }
      
 function onDeviceReady() {
-//         navigator.notification.alert("PhoneGap is working!!");
+logger("PhoneGap is working!!");
 Setlanguage();
 ShowDeviceElements();
 
@@ -36,7 +46,7 @@ ShowDeviceElements();
 		}
 
 
-	console.log('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
+	logger('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
 
 	$('#dollar p').html('$ '+ valDollar );
 	$('#tax').html(valTax + '%' );
@@ -191,9 +201,9 @@ var originalTax;
 var currentTax;
 var pageState = {};
 var valtimestamp;
-var mmToMonth = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
 var prevX;
-var appVersion = "1.0";
+var appVersion = "1.2";
 
 //storage
 
@@ -224,7 +234,7 @@ function loadState() {
 	return false; }
 	fx.base = localStorage["convert2euro.base"];
 	tmprates = localStorage.getItem('convert2euro.rates');
-	console.log(tmprates);
+	logger(tmprates);
 	fx.rates = JSON.parse(tmprates);
     window.valDollar = localStorage["convert2euro.lastDollar"];
 	window.valTax = localStorage["convert2euro.lastTax"];
@@ -234,7 +244,7 @@ function loadState() {
 // Use jQuery.ajax to get the latest exchange rates, with JSONP:
 // Load exchange rates data via the cross-domain/AJAX proxy:
 function getrates() {
-    $("#ratestimestamp").html("Requesting rates...");
+    $("#ratestimestamp").html(strRequest);
 	$.getJSON(
         'http://openexchangerates.org/latest.json',
         function(data) {
@@ -243,7 +253,7 @@ function getrates() {
                 fx.rates = data.rates;
                 fx.base = data.base;
                 window.valtimestamp = data.timestamp;
-				$("#ratestimestamp").html("Latest rates: " + showLocalDate(window.valtimestamp));
+				$("#ratestimestamp").html(strLatest + showLocalDate(window.valtimestamp));
 				$('#currentrates').html('1 USD = ' + fx(1).from('USD').to('EUR').toFixed(2) + ' €'+"<br/>"+'1 CAD = ' + fx(1).from('CAD').to('EUR').toFixed(2) + ' €' );
 
             } else {
@@ -365,7 +375,7 @@ $.fn.swipe = function(options) {
 
         // Screen touched, store the original coordinate
         function touchStart(event) {
-            console.log('Starting swipe gesture...')
+            logger('Starting swipe gesture...')
             originalCoord.x = event.targetTouches[0].pageX
             originalCoord.y = event.targetTouches[0].pageY
 			defaults.swipeStart();
@@ -399,14 +409,14 @@ $.fn.swipe = function(options) {
         // Swipe should only be on X axis, ignore if swipe on Y axis
         // Calculate if the swipe was left or right
         function touchEnd(event) {
-            console.log('Ending swipe gesture...')
+            logger('Ending swipe gesture...')
 			$(this).removeClass("swiping");
 			defaults.swipeEnd();
         }
 
         // Swipe was canceled
         function touchCancel(event) { 
-            console.log('Canceling swipe gesture...')
+            logger('Canceling swipe gesture...')
 			$(this).removeClass("swiping fade in");
 			$(this).addClass("swiping fade out");
         }
@@ -543,57 +553,6 @@ function watchForShake(threshold)
    );
 }
 
-function Setlanguage() {
-
-var lang;
-var workstring;
-
-// PhoneGap on Android would always return EN in navigator.*language.
-// Parse userAgent instead
-// Mozilla/5.0 (Linux; U; Android 2.2; de-ch; HTC Desire Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
-if ( navigator && navigator.userAgent
-        && (lang = navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))
-) {
-        lang = lang[1];
-}
-
-
-if (!lang && navigator) {
-
-        if (navigator.language) {
-                lang = navigator.language;
-        } else if (navigator.browserLanguage) {
-                lang = navigator.browserLanguage;
-        } else if (navigator.systemLanguage) {
-                lang = navigator.systemLanguage;
-        } else if (navigator.userLanguage) {
-                lang = navigator.userLanguage;
-        }
-		lang = lang.substr(0, 2);
-}
-
-switch(lang)
-{
-	case "en":
-	workstring = strings_en;
-	break;
-	
-	case "de":
-	workstring = strings_de;
-	break;
-	
-	default:
-	workstring = strings_en;
-	break;
-
-}
-
-$.each(workstring,function(key, value) {
-$('#'+key).html(value);
-console.log('#'+key+ " " + value);
-});
-
-}
 
 function ShowDeviceElements() {
 if( window.device) {
@@ -614,4 +573,13 @@ function backKeyDown() {
     // do something here if you wish
      alert('go back!');
 	 window.history.back();
+}
+
+function logger(tolog,alrt) {
+console.log("##HowMuchEuro: " + tolog);
+
+if (alrt !== undefined ) {
+alert(tolog);
+}
+
 }

@@ -290,6 +290,7 @@ margin-left: 1em;
 }
 
 .undertext {
+	font-size: 1em;
 	line-height: 2.5em;
 }
 
@@ -368,7 +369,8 @@ margin-left: 1em;
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen
 and (min-device-width : 320px)
-and (max-device-width : 479px) {
+and (max-device-width : 480px) 
+and (orientation : portrait) {
 /* Styles */
 
 
@@ -409,6 +411,7 @@ and (max-device-width : 479px) {
 }
 
 .undertext {
+	font-size: 1em;
 	line-height: 2em;
 }
 
@@ -416,7 +419,8 @@ and (max-device-width : 479px) {
 
 @media only screen
 and (min-device-width : 480px)
-and (max-device-width : 600px) {
+and (max-device-width : 600px) 
+and (orientation : portrait) {
 
 .subheader {
 	line-height: 4.5em;
@@ -454,7 +458,8 @@ and (max-device-width : 600px) {
 }
 
 .undertext {
-	line-height: 2.5em;
+	line-height: 1em;
+	font-size: 2em;
 }
 }
 /* Smartphones (landscape) ----------- */
@@ -510,12 +515,12 @@ and (orientation : portrait) {
 	}
 
 .middlelargetext p {
-	font-size:9em;
+	font-size:8em;
 }
 
 .undertext {
 	line-height: 2.3em;
-	font-size: 2em;
+	font-size: 1.5em;
 }
 
 }
@@ -554,7 +559,7 @@ and (orientation : portrait) {
 
 .undertext {
 	line-height: 2.3em;
-	font-size: 2em;
+	font-size: 1em;
 }
 
 }
@@ -576,6 +581,45 @@ and (min-width : 1824px) {
 only screen and (-webkit-min-device-pixel-ratio : 1.5),
 only screen and (min-device-pixel-ratio : 1.5) {
 /* Styles */
+.subheader {
+	line-height: 4.5em;
+}
+.subheader  p {
+	font-size:2em;
+	}
+
+.largetext{
+    line-height:3.5em;
+	}
+
+.largetext p {
+	font-size:4em;
+}
+.middlelargetext{
+    line-height:2em;
+	}
+
+.middlelargetext p {
+	font-size:3em;
+}
+
+#buttonwrapper {
+	height: 4.5em;
+}
+.headsmall {
+	font-size:1em;
+	line-height:2em;
+}
+
+.boldsmall  {
+	font-size:2em;
+	line-height:1em;
+}
+
+.undertext {
+	font-size: 1em;
+	line-height: 2.5em;
+}
 }
 
 /* kjashakkjkdsa */

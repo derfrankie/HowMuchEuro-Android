@@ -2,18 +2,18 @@
 
 function startAnalytics(ua) {
 
-if( window.device) {
+if( window.device && !window.doNotTrack) {
 	switch (device.platform) 
 	{
 	case "Android":
 	//alert(ua);
 	window.plugins.analytics.start (ua,       //UA-account ID         
-	function(){ console.log("started")},             //successCallBack         
-	function(){ console.log("didn't start")});         //failureCallBack);	
+	function(){ logger("started")},             //successCallBack         
+	function(){ logger("didn't start")});         //failureCallBack);	
 	break;
 	
 	case "iPhone":
-	console.log("started logging with " + ua)
+	logger("started logging with " + ua)
 	window.plugins.googleAnalyticsPlugin.startTrackerWithAccountID(ua);
 	break;
 	
@@ -25,18 +25,18 @@ if( window.device) {
 }
 
 function trackPage (page) {
-if( window.device) {
+if( window.device && !window.doNotTrack) {
 	switch (device.platform) 
 	{
 	case "Android":
 	window.plugins.analytics.trackPageView (          //**NB**: NOTE CAPITAL 'V'               
 	"/"+page,                                    //Page  (include /)               
-	function(){console.log("tracked page view: /" + page)},           //successCallBack                  
-	function(){console.log("didn't track page view:/" + page)});       //failureCallBack);
+	function(){logger("tracked page view: /" + page)},           //successCallBack                  
+	function(){logger("didn't track page view:/" + page)});       //failureCallBack);
 	break;
 	
 	case "iPhone":
-	console.log("tracked page view: /" + page)
+	logger("tracked page view: /" + page)
 	window.plugins.googleAnalyticsPlugin.trackPageview(page);
 	break;
 	
@@ -48,7 +48,7 @@ if( window.device) {
 }
 
 function trackEvent (category, action, label, value) {
-if( window.device) {
+if( window.device && !window.doNotTrack) {
 	switch (device.platform) 
 	{
 	case "Android":
@@ -57,13 +57,13 @@ if( window.device) {
 	action,    //Action            
 	label,//Label            
 	value,          //Value            
-	function(){ console.log("tracked event: " + category +" "+ action  +" "+ label  +" "+ value)},        //successCallBack            
-	function(){ console.log("didn't track event: "+ category +" "+ action  +" "+ label  +" "+ value)});    //failureCallBack);
+	function(){ logger("tracked event: " + category +" "+ action  +" "+ label  +" "+ value)},        //successCallBack            
+	function(){ logger("didn't track event: "+ category +" "+ action  +" "+ label  +" "+ value)});    //failureCallBack);
 	break;
 	
 	case "iPhone":
 	window.plugins.googleAnalyticsPlugin.trackEvent(category, action, label, value);
-	console.log("tracked event: " + category +" "+ action  +" "+ label  +" "+ value);
+	logger("tracked event: " + category +" "+ action  +" "+ label  +" "+ value);
 	break;
 	
 	default:

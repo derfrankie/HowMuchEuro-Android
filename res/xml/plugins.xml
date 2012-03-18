@@ -17,4 +17,5 @@
     <plugin name="FileTransfer" value="com.phonegap.FileTransfer"/>
     <plugin name="Capture" value="com.phonegap.Capture"/>
     <plugin name="GoogleAnalyticsTracker" value="com.phonegap.plugins.analytics.GoogleAnalyticsTracker" />
+	<plugin name="WebIntent" value="com.borismus.webintent.WebIntent" />
 </plugins>

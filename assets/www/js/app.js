@@ -17,7 +17,26 @@ document.addEventListener("deviceready", onDeviceReady, false);
          }
 */
 }
-     
+
+var theScroll;
+var valDollar;
+var valTax;
+var strCurrency;
+var valEuro;
+var valEuroTax;
+var originalDollar;
+var currentDolllar;
+var originalTax;
+var currentTax;
+var pageState = {};
+var valtimestamp;
+
+var doNotTrack = false;  //disable for final deployment
+
+var Launchcounter = 0;
+var prevX;
+var appVersion = "1.2";
+   
 function onDeviceReady() {
 logger("PhoneGap is working!!");
 Setlanguage();
@@ -33,7 +52,7 @@ ShowDeviceElements();
 		};
 		valDollar = "12";
 		valTax="12";
-		strCurrency="CAD";	
+		strCurrency="CAD";
 		}
 
 	if (strCurrency === "USD") {
@@ -45,7 +64,7 @@ ShowDeviceElements();
 			$('#CurrCAD').addClass("buttondown");
 		}
 
-
+		
 	logger('ten dollar? ' + fx(10).from('USD').to('EUR').toFixed(2));
 
 	$('#dollar p').html('$ '+ valDollar );
@@ -178,32 +197,94 @@ ShowDeviceElements();
 	calculate();
 	//alert ("show page");
 	changePage("#home", "show");
-	
 
 	startAnalytics("UA-29336779-1");
 	trackEvent ("App","Started","Version" + appVersion, appVersion);
-	watchForShake(5);	
+	watchForShake(5);
+	loaded(); // test iscroll
+	asktorate();
 
 
 
 //end loaded
      }
 
-var theScroll;
-var valDollar;
-var valTax;
-var strCurrency;
-var valEuro;
-var valEuroTax;
-var originalDollar;
-var currentDolllar;
-var originalTax;
-var currentTax;
-var pageState = {};
-var valtimestamp;
+// ask to rate in market
 
-var prevX;
-var appVersion = "1.2";
+
+function gorate(button)
+{
+logger(button);
+
+	switch (button) {
+	
+	case 1: //yes
+	if( window.device) {
+		switch (device.platform) 
+		{
+		
+		case "Android":
+		logger	("go android");
+		showUrl("market://details?id=bz.frankie.howmucheuro");
+		break;
+	
+		case "iPhone":
+		PhoneGap.exec('OpenURL.open', 'market://details?id=bz.frankie.howmucheuro');
+		break;
+	
+		default:
+		break;
+		}
+	}
+	window.Launchcounter == 6
+	saveState();
+	break;
+	
+	case 2: //later
+	window.Launchcounter == 0
+	saveState();
+	break;
+	
+	case 3: //no
+	window.Launchcounter == 6
+	saveState();
+	break;
+	
+	default:
+	break;
+
+	}
+}
+
+showUrl = function (address) {
+  window.plugins.webintent.startActivity({
+    action: WebIntent.ACTION_VIEW,
+    url: address,
+  }, function () {}, function () {
+    logger('Failed to open URL via Android Intent');
+  }
+  );
+}
+
+function asktorate() {
+
+	if (window.Launchcounter < 6) 
+	{
+		window.Launchcounter++;
+		logger("Application started: " + window.Launchcounter + " times");
+		saveState();
+	} 
+	 
+	if (window.Launchcounter == 5	) {
+		navigator.notification.confirm(
+        strRateMsg,  // message
+        gorate,              // callback to invoke with index of button pressed
+        strRateTitel,            // title
+        strRateButtons          // buttonLabels
+		);
+		}
+
+}
 
 //storage
 
@@ -224,6 +305,7 @@ function saveState() {
     localStorage["convert2euro.lastDollar"] = window.valDollar;
 	localStorage["convert2euro.lastTax"] = window.valTax;
 	localStorage["convert2euro.lastCurrency"] = window.strCurrency;
+	localStorage["convert2euro.Launchcounter"] = window.Launchcounter;
     return true;
 }
 
@@ -239,6 +321,7 @@ function loadState() {
     window.valDollar = localStorage["convert2euro.lastDollar"];
 	window.valTax = localStorage["convert2euro.lastTax"];
 	window.strCurrency = localStorage["convert2euro.lastCurrency"];
+	window.Launchcounter = localStorage["convert2euro.Launchcounter"];
     return true;
 }
 // Use jQuery.ajax to get the latest exchange rates, with JSONP:
@@ -579,7 +662,7 @@ function logger(tolog,alrt) {
 console.log("##HowMuchEuro: " + tolog);
 
 if (alrt !== undefined ) {
-alert(tolog);
+navigator.notification.alert(tolog,"Debug");
 }
 
 }

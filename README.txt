@@ -19,7 +19,7 @@ Changelog
      + Made ready for running on multiple OS - iOS added
      + New UI elements (for settings page)
 	 + Minor visual improvements
-1.2  + Added languages: French, Spanish, Portugese
+1.2  + Added languages: Italian, French, Spanish, Portugese
      # Fixed Visual resize issues
 	 # Fixed some previous translations
 	 

@@ -2,7 +2,7 @@ How much Euro?
 ==============
 
 How much Euro? is the first sales tax aware currency converter. In the US and Canada prices shown in stores are mostly without sales tax. This messes up the result of any normal currency converter.
-Not ìHow much Euro?î, which calculates the tax and adds it before converting dollars to euros. This helps travellers, exchange students and other visitors to the US and Canada to understand quickly how much an item costs in Euro just like they are used to in their home country.
+Not ‚ÄúHow much Euro?‚Äù, which calculates the tax and adds it before converting dollars to euros. This helps travellers, exchange students and other visitors to the US and Canada to understand quickly how much an item costs in Euro just like they are used to in their home country.
 
 More information: http://www.frankie.bz/v3/go/howmucheuropost/
 Help me translate this App: http://www.getlocalization.com/howmucheuro/
@@ -22,9 +22,10 @@ Changelog
 1.2  + Added languages: Italian, French, Spanish, Portugese
      # Fixed Visual resize issues
 	 # Fixed some previous translations
+1.3  # Fixed Currency Conversion API access
 	 
 
- Copyright 2012 Frank Neulichedl
+ Copyright 2012-2014 Frank Neulichedl
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
